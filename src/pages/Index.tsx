@@ -1,9 +1,9 @@
-
 import React, { useEffect, useState } from 'react';
 import { ArrowDown } from 'lucide-react';
 import Hero from '@/components/Hero';
 import ProjectCard from '@/components/ProjectCard';
 import TestimonialCard from '@/components/TestimonialCard';
+import PhotoGalleryPreview from '@/components/PhotoGalleryPreview';
 import Newsletter from '@/components/Newsletter';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
@@ -37,12 +37,12 @@ const Index = () => {
       status: "completed" as const
     },
     {
-      title: "Healthcare Mobile Clinics",
-      description: "Bringing essential healthcare services to remote areas through mobile medical units and trained professionals.",
+      title: "Wildlife Conservation Program",
+      description: "Protecting endangered species and their habitats through community-based conservation efforts.",
       location: "Philippines, Southeast Asia",
       date: "2024 - Upcoming",
       image: "https://images.unsplash.com/photo-1501854140801-50d01698950b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      category: "Healthcare",
+      category: "Environment",
       beneficiaries: 8000,
       status: "upcoming" as const
     }
@@ -50,7 +50,7 @@ const Index = () => {
 
   const testimonials = [
     {
-      quote: "Thanks to HopeFoundation's education program, my daughter can now attend school. This opportunity will change our family's future forever.",
+      quote: "Thanks to The Lance Foundation's education program, my daughter can now attend school. This opportunity will change our family's future forever.",
       author: "Maria Santos",
       role: "Parent, Guatemala",
       image: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80"
@@ -62,9 +62,9 @@ const Index = () => {
       image: "https://images.unsplash.com/photo-1523712999610-f77fbcfc3843?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80"
     },
     {
-      quote: "Working with HopeFoundation has been incredibly rewarding. Their commitment to sustainable development truly makes a lasting impact.",
+      quote: "Working with The Lance Foundation has been incredibly rewarding. Their commitment to sustainable development truly makes a lasting impact.",
       author: "Dr. Sarah Chen",
-      role: "Medical Volunteer",
+      role: "Environmental Scientist",
       image: "https://images.unsplash.com/photo-1473177104440-ffee2f376098?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80"
     }
   ];
@@ -101,7 +101,7 @@ const Index = () => {
             <Button 
               asChild
               size="lg"
-              className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full transition-all duration-300 hover:scale-105"
+              className="bg-teal-600 hover:bg-teal-700 text-white px-8 py-4 rounded-full transition-all duration-300 hover:scale-105"
             >
               <Link to="/projects">View All Projects</Link>
             </Button>
@@ -123,7 +123,7 @@ const Index = () => {
           
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="text-center fade-in-up">
-              <div className="text-4xl sm:text-5xl font-bold text-blue-600 mb-2">$2.5M</div>
+              <div className="text-4xl sm:text-5xl font-bold text-teal-600 mb-2">$2.5M</div>
               <div className="text-lg text-gray-600">Funds Raised</div>
             </div>
             <div className="text-center fade-in-up" style={{ animationDelay: '0.1s' }}>
@@ -131,19 +131,22 @@ const Index = () => {
               <div className="text-lg text-gray-600">Directly to Programs</div>
             </div>
             <div className="text-center fade-in-up" style={{ animationDelay: '0.2s' }}>
-              <div className="text-4xl sm:text-5xl font-bold text-yellow-600 mb-2">500+</div>
+              <div className="text-4xl sm:text-5xl font-bold text-pink-500 mb-2">500+</div>
               <div className="text-lg text-gray-600">Volunteers</div>
             </div>
             <div className="text-center fade-in-up" style={{ animationDelay: '0.3s' }}>
-              <div className="text-4xl sm:text-5xl font-bold text-purple-600 mb-2">15</div>
+              <div className="text-4xl sm:text-5xl font-bold text-teal-700 mb-2">15</div>
               <div className="text-lg text-gray-600">Years of Service</div>
             </div>
           </div>
         </div>
       </section>
 
+      {/* Photo Gallery Preview */}
+      <PhotoGalleryPreview />
+
       {/* Testimonials Section */}
-      <section className="py-16 bg-gradient-to-r from-blue-50 to-green-50">
+      <section className="py-16 bg-gradient-to-r from-teal-50 to-green-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
@@ -182,7 +185,7 @@ const Index = () => {
             <Button 
               asChild
               size="lg"
-              className="bg-gradient-to-r from-blue-600 to-green-600 hover:from-blue-700 hover:to-green-700 text-white px-8 py-4 rounded-full transition-all duration-300 hover:scale-105"
+              className="bg-gradient-to-r from-teal-600 to-green-600 hover:from-teal-700 hover:to-green-700 text-white px-8 py-4 rounded-full transition-all duration-300 hover:scale-105"
             >
               <Link to="/donate">Start Donating</Link>
             </Button>
@@ -191,7 +194,7 @@ const Index = () => {
               asChild
               variant="outline"
               size="lg"
-              className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-4 rounded-full transition-all duration-300 hover:scale-105"
+              className="border-2 border-teal-600 text-teal-600 hover:bg-teal-600 hover:text-white px-8 py-4 rounded-full transition-all duration-300 hover:scale-105"
             >
               <Link to="/contact">Become a Volunteer</Link>
             </Button>

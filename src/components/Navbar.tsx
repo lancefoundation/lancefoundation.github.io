@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Heart } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const Navbar = () => {
@@ -12,6 +12,7 @@ const Navbar = () => {
     { name: 'Home', path: '/' },
     { name: 'About', path: '/about' },
     { name: 'Projects', path: '/projects' },
+    { name: 'Gallery', path: '/gallery' },
     { name: 'Contact', path: '/contact' },
   ];
 
@@ -22,11 +23,15 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo and Brand */}
-          <Link to="/" className="flex items-center space-x-2 group">
-            <div className="bg-gradient-to-r from-blue-600 to-green-600 p-2 rounded-lg group-hover:scale-110 transition-transform duration-300">
-              <Heart className="h-6 w-6 text-white" />
+          <Link to="/" className="flex items-center space-x-3 group">
+            <div className="w-10 h-10 rounded-full overflow-hidden group-hover:scale-110 transition-transform duration-300">
+              <img 
+                src="/lovable-uploads/aec71801-e168-4793-8f77-73fefcc24598.png" 
+                alt="The Lance Foundation" 
+                className="w-full h-full object-cover"
+              />
             </div>
-            <span className="text-xl font-bold gradient-text">HopeFoundation</span>
+            <span className="text-xl font-bold gradient-text">The Lance Foundation</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -35,9 +40,9 @@ const Navbar = () => {
               <Link
                 key={item.name}
                 to={item.path}
-                className={`text-sm font-medium transition-colors duration-300 hover:text-blue-600 ${
+                className={`text-sm font-medium transition-colors duration-300 hover:text-teal-600 ${
                   isActive(item.path) 
-                    ? 'text-blue-600 border-b-2 border-blue-600 pb-1' 
+                    ? 'text-teal-600 border-b-2 border-teal-600 pb-1' 
                     : 'text-gray-700'
                 }`}
               >
@@ -46,7 +51,7 @@ const Navbar = () => {
             ))}
             <Button 
               asChild
-              className="bg-gradient-to-r from-blue-600 to-green-600 hover:from-blue-700 hover:to-green-700 text-white px-6 py-2 rounded-full transition-all duration-300 hover:scale-105"
+              className="bg-gradient-to-r from-teal-600 to-green-600 hover:from-teal-700 hover:to-green-700 text-white px-6 py-2 rounded-full transition-all duration-300 hover:scale-105"
             >
               <Link to="/donate">Donate Now</Link>
             </Button>
@@ -56,7 +61,7 @@ const Navbar = () => {
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-700 hover:text-blue-600 p-2"
+              className="text-gray-700 hover:text-teal-600 p-2"
             >
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
@@ -75,8 +80,8 @@ const Navbar = () => {
                 onClick={() => setIsOpen(false)}
                 className={`block px-3 py-2 text-base font-medium rounded-md transition-colors duration-300 ${
                   isActive(item.path)
-                    ? 'text-blue-600 bg-blue-50'
-                    : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
+                    ? 'text-teal-600 bg-teal-50'
+                    : 'text-gray-700 hover:text-teal-600 hover:bg-gray-50'
                 }`}
               >
                 {item.name}
@@ -84,7 +89,7 @@ const Navbar = () => {
             ))}
             <Button 
               asChild
-              className="w-full bg-gradient-to-r from-blue-600 to-green-600 text-white mt-4"
+              className="w-full bg-gradient-to-r from-teal-600 to-green-600 text-white mt-4"
             >
               <Link to="/donate" onClick={() => setIsOpen(false)}>
                 Donate Now

@@ -3,7 +3,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom color palette for charity website */
+/* Custom color palette for The Lance Foundation */
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -15,7 +15,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 214 88% 55%;
+    --primary: 184 91% 25%;
     --primary-foreground: 210 40% 98%;
 
     --secondary: 210 40% 96.1%;
@@ -24,7 +24,7 @@
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 47 96% 53%;
+    --accent: 134 61% 41%;
     --accent-foreground: 222.2 47.4% 11.2%;
 
     --destructive: 0 84.2% 60.2%;
@@ -32,15 +32,15 @@
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 214 88% 55%;
+    --ring: 184 91% 25%;
 
     --radius: 0.5rem;
 
-    --charity-blue-light: 219 100% 66%;
-    --charity-blue-dark: 214 88% 45%;
-    --charity-green: 160 84% 39%;
-    --charity-green-light: 142 69% 58%;
-    --charity-gold: 43 96% 56%;
+    --lance-teal: 184 91% 25%;
+    --lance-teal-light: 184 77% 35%;
+    --lance-green: 134 61% 41%;
+    --lance-green-light: 134 50% 55%;
+    --lance-pink: 343 81% 58%;
   }
 }
 
@@ -80,10 +80,10 @@
 
 @keyframes pulse-glow {
   0%, 100% {
-    box-shadow: 0 0 20px rgba(37, 99, 235, 0.3);
+    box-shadow: 0 0 20px rgba(20, 83, 87, 0.3);
   }
   50% {
-    box-shadow: 0 0 40px rgba(37, 99, 235, 0.6);
+    box-shadow: 0 0 40px rgba(20, 83, 87, 0.6);
   }
 }
 
@@ -101,7 +101,7 @@
 
 /* Custom utility classes */
 .gradient-text {
-  background: linear-gradient(135deg, hsl(var(--charity-blue-dark)), hsl(var(--charity-green)));
+  background: linear-gradient(135deg, hsl(var(--lance-teal)), hsl(var(--lance-green)));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -109,9 +109,9 @@
 
 .hero-gradient {
   background: linear-gradient(135deg, 
-    hsl(var(--charity-blue-light)) 0%, 
-    hsl(var(--charity-blue-dark)) 50%, 
-    hsl(var(--charity-green)) 100%);
+    hsl(var(--lance-teal-light)) 0%, 
+    hsl(var(--lance-teal)) 50%, 
+    hsl(var(--lance-green)) 100%);
 }
 
 .card-hover {
