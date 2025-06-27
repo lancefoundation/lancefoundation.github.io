@@ -7,7 +7,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 const Leadership = () => {
   const leaders = [
     {
-      name: "Dr. Lance Williams",
+      name: "Dr. Denis Gathua",
       role: "Founder & Executive Director",
       image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
       bio: "Dr. Lance Williams founded The Lance Foundation in 2008 with a vision to create sustainable change in underserved communities worldwide. With over 20 years of experience in international development, he has led transformative projects across Africa, Asia, and Latin America.",
