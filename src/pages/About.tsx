@@ -1,33 +1,60 @@
 
 import React from 'react';
-import { Heart, Users, Globe, Award, Target, Eye, BookOpen, Stethoscope, Droplets } from 'lucide-react';
+import { Heart, Users, Globe, Award, Target, Eye, BookOpen, Stethoscope, Droplets, MapPin, Calendar, DollarSign } from 'lucide-react';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 
 const About = () => {
-  const teamMembers = [
+  const milestones = [
     {
-      name: "Dr. Lance Williams",
-      role: "Founder & Executive Director",
-      image: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
-      bio: "Dedicated to transforming communities through sustainable development"
+      year: "2008",
+      title: "Foundation Established",
+      description: "The Lance Foundation was founded with a mission to address critical health and development challenges in underserved communities."
     },
     {
-      name: "Sarah Johnson",
-      role: "Program Director",
-      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
-      bio: "15+ years in international development and community health"
+      year: "2010",
+      title: "First Major Project",
+      description: "Launched our first large-scale clean water initiative in Kenya, serving 5,000 people in rural communities."
     },
     {
-      name: "Dr. Michael Chen",
-      role: "Medical Director",
-      image: "https://images.unsplash.com/photo-1501854140801-50d01698950b?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
-      bio: "Leading healthcare initiatives in underserved communities"
+      year: "2015",
+      title: "Healthcare Expansion",
+      description: "Established 12 healthcare clinics across three countries, providing essential medical services to remote areas."
     },
     {
-      name: "Elena Rodriguez",
-      role: "Field Operations Manager",
-      image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
-      bio: "Specialist in sustainable development and community engagement"
+      year: "2018",
+      title: "Education Programs Launch",
+      description: "Initiated comprehensive education programs, building schools and training teachers in underserved regions."
+    },
+    {
+      year: "2020",
+      title: "COVID-19 Response",
+      description: "Rapidly adapted programs to support communities during the pandemic, distributing PPE and supporting healthcare systems."
+    },
+    {
+      year: "2023",
+      title: "Milestone Achievement",
+      description: "Reached over 100,000 lives directly impacted through our comprehensive development programs."
+    }
+  ];
+
+  const globalPresence = [
+    {
+      region: "East Africa",
+      countries: ["Kenya", "Tanzania", "Uganda", "Rwanda"],
+      programs: ["Clean Water", "Healthcare", "Education"],
+      beneficiaries: "45,000+"
+    },
+    {
+      region: "Southeast Asia",
+      countries: ["Philippines", "Indonesia", "Cambodia"],
+      programs: ["Healthcare", "Community Development"],
+      beneficiaries: "28,000+"
+    },
+    {
+      region: "Latin America",
+      countries: ["Guatemala", "Honduras", "Peru"],
+      programs: ["Education", "Healthcare", "Clean Water"],
+      beneficiaries: "35,000+"
     }
   ];
 
@@ -35,22 +62,26 @@ const About = () => {
     {
       icon: Stethoscope,
       title: "Healthcare Access",
-      description: "Providing essential medical services and health education to underserved communities worldwide."
+      description: "Providing essential medical services, training healthcare workers, and establishing sustainable healthcare systems in underserved communities.",
+      impact: "25 clinics established, 200+ healthcare workers trained"
     },
     {
       icon: BookOpen,
       title: "Education & Literacy",
-      description: "Building schools, training teachers, and creating educational opportunities for children and adults."
+      description: "Building schools, training teachers, providing educational materials, and creating opportunities for children and adults to learn and grow.",
+      impact: "45 schools built, 1,200+ students enrolled, 85+ teachers trained"
     },
     {
       icon: Droplets,
       title: "Clean Water & Sanitation",
-      description: "Developing sustainable water systems and promoting hygiene practices in rural communities."
+      description: "Developing sustainable water systems, promoting hygiene practices, and ensuring access to clean water for drinking and sanitation.",
+      impact: "50+ wells drilled, 40,000+ people with clean water access"
     },
     {
       icon: Users,
       title: "Community Development",
-      description: "Empowering local leaders and building capacity for long-term sustainable growth."
+      description: "Empowering local leaders, building capacity, and supporting economic development initiatives that create sustainable change.",
+      impact: "156 communities served, 300+ local leaders trained"
     }
   ];
 
@@ -85,7 +116,7 @@ const About = () => {
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-4xl sm:text-5xl font-bold mb-6">About The Lance Foundation</h1>
             <p className="text-xl opacity-90 leading-relaxed">
-              Transforming lives through sustainable community development, healthcare, education, and empowerment programs that create lasting change.
+              Transforming lives through sustainable community development, healthcare, education, and empowerment programs that create lasting change across the globe.
             </p>
           </div>
         </div>
@@ -99,13 +130,13 @@ const About = () => {
               <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">Our Story</h2>
               <div className="space-y-4 text-gray-600 leading-relaxed">
                 <p>
-                  The Lance Foundation was founded with a vision to create sustainable change in communities worldwide. Named after our founder Dr. Lance Williams, our organization began as a grassroots initiative focused on addressing the most pressing needs of underserved populations.
+                  The Lance Foundation was founded in 2008 by Dr. Lance Williams with a vision to create sustainable change in communities worldwide. What began as a small medical mission has evolved into a comprehensive development organization working across multiple sectors to address the root causes of poverty and inequality.
                 </p>
                 <p>
-                  What started as a small medical mission has evolved into a comprehensive development organization working across multiple sectors. We believe that true transformation happens when communities are empowered to lead their own development journey.
+                  Named after our founder, our organization has grown from serving a single community to operating in 25 countries across three continents. We believe that true transformation happens when communities are empowered to lead their own development journey, which is why we focus on building local capacity and ensuring program sustainability.
                 </p>
                 <p>
-                  Today, we operate programs in healthcare, education, water and sanitation, and community development, always with the goal of building local capacity and ensuring program sustainability beyond our direct involvement.
+                  Today, we operate integrated programs in healthcare, education, water and sanitation, and community development, always with the goal of creating measurable, lasting impact that continues long after our direct involvement ends.
                 </p>
               </div>
             </div>
@@ -117,10 +148,83 @@ const About = () => {
                 className="rounded-lg shadow-xl"
               />
               <div className="absolute -bottom-6 -right-6 bg-green-500 text-white p-6 rounded-lg shadow-lg">
-                <div className="text-2xl font-bold">15+</div>
-                <div className="text-sm">Years of Impact</div>
+                <div className="text-2xl font-bold">108,500+</div>
+                <div className="text-sm">Lives Transformed</div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Timeline */}
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Our Journey</h2>
+            <p className="text-xl text-gray-600">Key milestones in our mission to transform communities</p>
+          </div>
+
+          <div className="relative">
+            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-teal-200"></div>
+            <div className="space-y-12">
+              {milestones.map((milestone, index) => (
+                <div key={index} className={`flex items-center ${index % 2 === 0 ? 'justify-start' : 'justify-end'}`}>
+                  <div className={`w-5/12 ${index % 2 === 0 ? 'pr-8 text-right' : 'pl-8'}`}>
+                    <Card className="hover:shadow-lg transition-shadow">
+                      <CardContent className="p-6">
+                        <div className="flex items-center mb-3">
+                          <Calendar className="h-5 w-5 text-teal-600 mr-2" />
+                          <span className="text-2xl font-bold text-teal-600">{milestone.year}</span>
+                        </div>
+                        <h4 className="text-xl font-semibold text-gray-900 mb-2">{milestone.title}</h4>
+                        <p className="text-gray-600">{milestone.description}</p>
+                      </CardContent>
+                    </Card>
+                  </div>
+                  <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-teal-600 rounded-full border-4 border-white"></div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Global Presence */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Global Presence</h2>
+            <p className="text-xl text-gray-600">Working across three continents to create lasting change</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {globalPresence.map((region, index) => (
+              <Card key={index} className="hover:shadow-lg transition-shadow">
+                <CardHeader>
+                  <div className="flex items-center mb-2">
+                    <MapPin className="h-6 w-6 text-teal-600 mr-2" />
+                    <h3 className="text-xl font-bold text-gray-900">{region.region}</h3>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    <div>
+                      <h4 className="font-semibold text-gray-900 mb-2">Countries</h4>
+                      <p className="text-gray-600">{region.countries.join(', ')}</p>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-gray-900 mb-2">Programs</h4>
+                      <p className="text-gray-600">{region.programs.join(', ')}</p>
+                    </div>
+                    <div className="flex items-center">
+                      <Users className="h-5 w-5 text-green-600 mr-2" />
+                      <span className="text-lg font-semibold text-green-600">{region.beneficiaries}</span>
+                      <span className="text-gray-600 ml-1">beneficiaries</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
@@ -133,13 +237,17 @@ const About = () => {
             <p className="text-xl text-gray-600">Creating impact through targeted interventions</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {focusAreas.map((area, index) => (
-              <Card key={index} className="text-center p-6 hover:shadow-lg transition-shadow">
-                <CardContent>
-                  <area.icon className="h-12 w-12 text-teal-600 mx-auto mb-4" />
-                  <h4 className="text-xl font-semibold text-gray-900 mb-3">{area.title}</h4>
-                  <p className="text-gray-600 text-sm">{area.description}</p>
+              <Card key={index} className="hover:shadow-lg transition-shadow">
+                <CardContent className="p-8">
+                  <area.icon className="h-12 w-12 text-teal-600 mb-4" />
+                  <h4 className="text-2xl font-semibold text-gray-900 mb-4">{area.title}</h4>
+                  <p className="text-gray-600 mb-4">{area.description}</p>
+                  <div className="flex items-center text-green-600 font-semibold">
+                    <Award className="h-4 w-4 mr-2" />
+                    <span className="text-sm">{area.impact}</span>
+                  </div>
                 </CardContent>
               </Card>
             ))}
@@ -208,52 +316,41 @@ const About = () => {
         </div>
       </section>
 
-      {/* Team Section */}
+      {/* Financial Transparency */}
       <section className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Leadership Team</h2>
-            <p className="text-xl text-gray-600">Experienced professionals committed to sustainable development</p>
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Financial Transparency</h2>
+            <p className="text-xl text-gray-600">Committed to accountability and responsible stewardship</p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {teamMembers.map((member, index) => (
-              <Card key={index} className="text-center overflow-hidden hover:shadow-lg transition-shadow">
-                <div className="h-64 overflow-hidden">
-                  <img 
-                    src={member.image} 
-                    alt={member.name}
-                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
-                  />
-                </div>
-                <CardContent className="p-6">
-                  <h4 className="text-xl font-semibold text-gray-900 mb-1">{member.name}</h4>
-                  <p className="text-teal-600 font-medium mb-3">{member.role}</p>
-                  <p className="text-gray-600 text-sm">{member.bio}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Registration & Legal */}
-      <section className="py-16 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8">Legal & Registration</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div>
-              <h4 className="font-semibold text-gray-900 mb-2">Charity Registration</h4>
-              <p className="text-gray-600">#12345678</p>
-            </div>
-            <div>
-              <h4 className="font-semibold text-gray-900 mb-2">Tax Exempt Status</h4>
-              <p className="text-gray-600">501(c)(3) Approved</p>
-            </div>
-            <div>
-              <h4 className="font-semibold text-gray-900 mb-2">Financial Transparency</h4>
-              <p className="text-gray-600">GuideStar Gold Seal</p>
-            </div>
+            <Card className="text-center p-6">
+              <CardContent>
+                <DollarSign className="h-12 w-12 text-green-600 mx-auto mb-4" />
+                <div className="text-3xl font-bold text-gray-900 mb-2">85%</div>
+                <h4 className="text-lg font-semibold text-gray-900 mb-2">Program Services</h4>
+                <p className="text-gray-600 text-sm">Direct investment in our mission programs</p>
+              </CardContent>
+            </Card>
+
+            <Card className="text-center p-6">
+              <CardContent>
+                <Award className="h-12 w-12 text-teal-600 mx-auto mb-4" />
+                <div className="text-3xl font-bold text-gray-900 mb-2">4-Star</div>
+                <h4 className="text-lg font-semibold text-gray-900 mb-2">Charity Navigator</h4>
+                <p className="text-gray-600 text-sm">Highest rating for accountability and transparency</p>
+              </CardContent>
+            </Card>
+
+            <Card className="text-center p-6">
+              <CardContent>
+                <Globe className="h-12 w-12 text-blue-600 mx-auto mb-4" />
+                <div className="text-3xl font-bold text-gray-900 mb-2">501(c)(3)</div>
+                <h4 className="text-lg font-semibold text-gray-900 mb-2">Tax Exempt</h4>
+                <p className="text-gray-600 text-sm">Registered nonprofit organization</p>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
