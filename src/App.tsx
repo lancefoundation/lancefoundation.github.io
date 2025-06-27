@@ -8,7 +8,9 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Index from "./pages/Index";
 import About from "./pages/About";
+import Programs from "./pages/Programs";
 import Projects from "./pages/Projects";
+import Impact from "./pages/Impact";
 import Gallery from "./pages/Gallery";
 import Donate from "./pages/Donate";
 import Contact from "./pages/Contact";
@@ -28,7 +30,9 @@ const App = () => (
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/about" element={<About />} />
+              <Route path="/programs" element={<Programs />} />
               <Route path="/projects" element={<Projects />} />
+              <Route path="/impact" element={<Impact />} />
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/donate" element={<Donate />} />
               <Route path="/contact" element={<Contact />} />
