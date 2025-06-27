@@ -1,6 +1,5 @@
-
 import React, { useState } from 'react';
-import { Heart, CreditCard, Shield, Gift } from 'lucide-react';
+import { Heart, CreditCard, Shield, Gift, Smartphone } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -12,8 +11,10 @@ import { useToast } from '@/hooks/use-toast';
 
 const Donate = () => {
   const [donationType, setDonationType] = useState('one-time');
+  const [paymentMethod, setPaymentMethod] = useState<'card' | 'mpesa'>('card');
   const [amount, setAmount] = useState('');
   const [customAmount, setCustomAmount] = useState('');
+  const [mpesaPhone, setMpesaPhone] = useState('');
   const [donorInfo, setDonorInfo] = useState({
     name: '',
     email: '',
@@ -44,27 +45,78 @@ const Donate = () => {
     setAmount('');
   };
 
+  const finalAmount = customAmount || amount;
+  const finalAmountNumber = parseInt(finalAmount);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
-    // Simulate payment processing
+    if (!finalAmount || isNaN(finalAmountNumber) || finalAmountNumber < 1) {
+      toast({
+        title: "Invalid amount",
+        description: "Please enter or select a valid amount.",
+      });
+      setIsLoading(false);
+      return;
+    }
+
+    if (paymentMethod === 'mpesa') {
+      // Validate phone number
+      if (!mpesaPhone.match(/^(2547\d{8}|07\d{8})$/)) {
+        toast({
+          title: "Invalid Phone",
+          description: "Enter a valid Kenyan phone number (e.g., 0712345678 or 254712345678).",
+        });
+        setIsLoading(false);
+        return;
+      }
+      // Call backend for M-Pesa STK push (test)
+      try {
+        const res = await fetch('/api/mpesa', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            amount: finalAmountNumber,
+            phone: mpesaPhone,
+            name: donorInfo.name,
+            email: donorInfo.email,
+            message: donorInfo.message,
+            donationType
+          }),
+        });
+        const data = await res.json();
+        if (data.status === 'success') {
+          toast({
+            title: "M-Pesa STK Push Sent",
+            description: "Check your phone to complete the payment (use test credentials for sandbox).",
+          });
+        } else {
+          toast({
+            title: "M-Pesa Error",
+            description: data.message || "Failed to initiate payment.",
+          });
+        }
+      } catch (err) {
+        toast({ title: "Network Error", description: "Could not connect to M-Pesa API." });
+      }
+      setIsLoading(false);
+      // Optionally reset form here
+      return;
+    }
+
+    // Simulate payment processing for Card (existing logic)
     setTimeout(() => {
       toast({
         title: "Thank you for your donation!",
         description: "Your generous contribution will make a real difference in communities worldwide.",
       });
-      
-      // Reset form
       setAmount('');
       setCustomAmount('');
       setDonorInfo({ name: '', email: '', message: '' });
       setIsLoading(false);
     }, 2000);
   };
-
-  const finalAmount = customAmount || amount;
-  const finalAmountNumber = parseInt(finalAmount);
 
   return (
     <div className="min-h-screen pt-16">
@@ -105,6 +157,39 @@ const Donate = () => {
                       </div>
                     </RadioGroup>
                   </div>
+
+                  {/* Payment Method */}
+                  <div>
+                    <Label className="text-base font-medium mb-3 block">Payment Method</Label>
+                    <RadioGroup value={paymentMethod} onValueChange={setPaymentMethod}>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="card" id="card" />
+                        <Label htmlFor="card">Credit/Debit Card</Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="mpesa" id="mpesa" />
+                        <Label htmlFor="mpesa">M-Pesa</Label>
+                      </div>
+                    </RadioGroup>
+                  </div>
+                  {paymentMethod === 'mpesa' && (
+                    <div>
+                      <Label className="text-base font-medium mb-2 block">M-Pesa Phone Number</Label>
+                      <div className="relative">
+                        <Smartphone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
+                        <Input
+                          type="tel"
+                          placeholder="e.g. 0712345678 or 254712345678"
+                          value={mpesaPhone}
+                          onChange={(e) => setMpesaPhone(e.target.value)}
+                          className="pl-10"
+                          minLength={10}
+                          maxLength={12}
+                          required={paymentMethod === 'mpesa'}
+                        />
+                      </div>
+                    </div>
+                  )}
 
                   {/* Amount Selection */}
                   <div>
@@ -197,8 +282,14 @@ const Donate = () => {
                       </div>
                     ) : (
                       <div className="flex items-center gap-2">
-                        <CreditCard className="h-5 w-5" />
-                        Donate ${finalAmount || '0'} {donationType === 'monthly' ? '/month' : ''}
+                        {paymentMethod === 'mpesa' ? (
+                          <Smartphone className="h-5 w-5" />
+                        ) : (
+                          <CreditCard className="h-5 w-5" />
+                        )}
+                        {paymentMethod === 'mpesa'
+                          ? `Donate ${finalAmount ? 'Ksh' : ''}${finalAmount || ''} via M-Pesa`
+                          : `Donate $${finalAmount || '0'}${donationType === 'monthly' ? '/month' : ''}`}
                       </div>
                     )}
                   </Button>
