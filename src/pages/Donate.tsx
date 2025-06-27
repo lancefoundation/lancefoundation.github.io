@@ -25,7 +25,7 @@ const Donate = () => {
 
   const presetAmounts = [25, 50, 100, 250, 500, 1000];
 
-  const impactDescriptions = {
+  const impactDescriptions: Record<number, string> = {
     25: "Provides clean water for a family for one month",
     50: "Supplies school materials for 5 children",
     100: "Feeds a family for two weeks",
@@ -64,6 +64,7 @@ const Donate = () => {
   };
 
   const finalAmount = customAmount || amount;
+  const finalAmountNumber = parseInt(finalAmount);
 
   return (
     <div className="min-h-screen pt-16">
@@ -136,10 +137,10 @@ const Donate = () => {
                   </div>
 
                   {/* Impact Description */}
-                  {finalAmount && impactDescriptions[finalAmount as keyof typeof impactDescriptions] && (
+                  {finalAmount && impactDescriptions[finalAmountNumber] && (
                     <div className="bg-blue-50 p-4 rounded-lg">
                       <p className="text-blue-800 font-medium">
-                        Your ${finalAmount} donation: {impactDescriptions[finalAmount as keyof typeof impactDescriptions]}
+                        Your ${finalAmount} donation: {impactDescriptions[finalAmountNumber]}
                       </p>
                     </div>
                   )}
@@ -152,7 +153,7 @@ const Donate = () => {
                       <Checkbox 
                         id="anonymous" 
                         checked={isAnonymous}
-                        onCheckedChange={setIsAnonymous}
+                        onCheckedChange={(checked) => setIsAnonymous(checked === true)}
                       />
                       <Label htmlFor="anonymous">Make this an anonymous donation</Label>
                     </div>
