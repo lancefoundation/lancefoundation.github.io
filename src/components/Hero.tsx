@@ -74,7 +74,7 @@ const Hero = () => {
       asChild
       variant="outline"
       size="lg"
-      className="border-2 border-white text-white hover:bg-white hover:text-gray-900 px-8 py-3 rounded-full transition-all duration-300 hover:scale-105 shadow-xl w-full sm:w-auto text-center"
+      className="border-2 border-white text-white hover:bg-teal hover:text-black px-8 py-3 rounded-full transition-all duration-300 hover:scale-105 shadow-xl w-full sm:w-auto text-center"
     >
       <Link to="/projects" className="block">View Our Work</Link>
     </Button>
