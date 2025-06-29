@@ -45,7 +45,7 @@ const Hero = () => {
       ></div>
       
       {/* Content */}
-      <div className="relative z-10 text-center text-white px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+       <div className="relative z-10 text-center text-white px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto pt-24"> {/* Added pt-24 here */}
         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 fade-in-up">
           Creating Lasting Impact,
           <br />
@@ -70,14 +70,14 @@ const Hero = () => {
             <Link to="/donate" className="block">Donate Now</Link>
           </Button>
           
-          <Button 
-            asChild
-            variant="outline"
-            size="lg"
-            className="border-2 border-white text-white hover:bg-green hover:text-gray-900 px-8 py-3 rounded-full transition-all duration-300 hover:scale-105 shadow-xl w-full sm:w-auto text-center"
-          >
-            <Link to="/projects" className="block">View Our Work</Link>
-          </Button>
+         <Button
+      asChild
+      variant="outline"
+      size="lg"
+      className="border-2 border-white text-white hover:bg-white hover:text-gray-900 px-8 py-3 rounded-full transition-all duration-300 hover:scale-105 shadow-xl w-full sm:w-auto text-center"
+    >
+      <Link to="/projects" className="block">View Our Work</Link>
+    </Button>
         </div>
         
         {/* Image Carousel */}
