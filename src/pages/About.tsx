@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card';
 const About = () => {
   const milestones = [
     {
-      year: "2008",
+      year: "2019",
       title: "Foundation Established",
       description: "The Lance Foundation was founded with a mission to address critical health and development challenges in underserved communities."
     },
