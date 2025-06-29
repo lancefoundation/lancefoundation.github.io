@@ -1,11 +1,38 @@
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ArrowDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import ImageCarousel from './ImageCarousel';
 
 const Hero = () => {
+  const [counters, setCounters] = useState({
+    lives: 0,
+    projects: 0,
+    countries: 0
+  });
+
+  // Counter animation effect
+  useEffect(() => {
+    const animateCounter = (target: number, key: 'lives' | 'projects' | 'countries') => {
+      let current = 0;
+      const increment = target / 100; // Adjust speed here
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          current = target;
+          clearInterval(timer);
+        }
+        setCounters(prev => ({ ...prev, [key]: Math.floor(current) }));
+      }, 20);
+    };
+
+    // Start animations with delay
+    setTimeout(() => animateCounter(108000, 'lives'), 500);
+    setTimeout(() => animateCounter(342, 'projects'), 700);
+    setTimeout(() => animateCounter(25, 'countries'), 900);
+  }, []);
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background with gradient overlay */}
@@ -34,22 +61,22 @@ const Hero = () => {
           "Service to Humanity is Service to God"
         </div>
         
-        <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12">
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12 max-w-2xl mx-auto">
           <Button 
             asChild
             size="lg"
-            className="bg-green-500 hover:bg-green-600 text-gray-900 font-semibold px-10 py-4 rounded-full transition-all duration-300 hover:scale-105 pulse-glow shadow-2xl min-w-[200px]"
+            className="bg-green-500 hover:bg-green-600 text-gray-900 font-semibold px-8 py-3 rounded-full transition-all duration-300 hover:scale-105 pulse-glow shadow-2xl w-full sm:w-auto text-center"
           >
-            <Link to="/donate">Donate Now</Link>
+            <Link to="/donate" className="block">Donate Now</Link>
           </Button>
           
           <Button 
             asChild
             variant="outline"
             size="lg"
-            className="border-2 border-white text-white hover:bg-white hover:text-gray-900 px-10 py-4 rounded-full transition-all duration-300 hover:scale-105 shadow-xl min-w-[200px]"
+            className="border-2 border-white text-white hover:bg-white hover:text-gray-900 px-8 py-3 rounded-full transition-all duration-300 hover:scale-105 shadow-xl w-full sm:w-auto text-center"
           >
-            <Link to="/projects">View Our Work</Link>
+            <Link to="/projects" className="block">View Our Work</Link>
           </Button>
         </div>
         
@@ -61,15 +88,21 @@ const Hero = () => {
         {/* Stats with Counter Animation */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mt-16">
           <div className="text-center fade-in-up">
-            <div className="text-3xl sm:text-4xl font-bold text-green-300 mb-2 counter-animation" data-target="108000">0+</div>
+            <div className="text-3xl sm:text-4xl font-bold text-green-300 mb-2 counter-animation">
+              {counters.lives.toLocaleString()}+
+            </div>
             <div className="text-lg opacity-90">Lives Impacted</div>
           </div>
           <div className="text-center fade-in-up" style={{ animationDelay: '0.2s' }}>
-            <div className="text-3xl sm:text-4xl font-bold text-green-300 mb-2 counter-animation" data-target="342">0+</div>
+            <div className="text-3xl sm:text-4xl font-bold text-green-300 mb-2 counter-animation">
+              {counters.projects}+
+            </div>
             <div className="text-lg opacity-90">Projects Completed</div>
           </div>
           <div className="text-center fade-in-up" style={{ animationDelay: '0.4s' }}>
-            <div className="text-3xl sm:text-4xl font-bold text-green-300 mb-2 counter-animation" data-target="25">0</div>
+            <div className="text-3xl sm:text-4xl font-bold text-green-300 mb-2 counter-animation">
+              {counters.countries}
+            </div>
             <div className="text-lg opacity-90">Countries Served</div>
           </div>
         </div>

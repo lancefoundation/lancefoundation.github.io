@@ -42,7 +42,7 @@ const Index = () => {
       description: "Deploying mobile medical units to provide healthcare services to isolated island communities in the Philippines.",
       location: "Mindanao Islands, Philippines",
       date: "2024 - Upcoming",
-      image: "https://images.unsplash.com/photo-1501854140801-50d01698950b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       category: "Healthcare",
       beneficiaries: 18000,
       status: "upcoming" as const
@@ -186,22 +186,22 @@ const Index = () => {
             Every contribution, whether financial or volunteer time, helps us create meaningful impact in communities that need it most.
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-2xl mx-auto">
             <Button 
               asChild
               size="lg"
-              className="bg-white text-teal-600 hover:bg-gray-100 px-10 py-4 rounded-full font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl"
+              className="bg-white text-teal-600 hover:bg-gray-100 px-8 py-3 rounded-full font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl w-full sm:w-auto"
             >
-              <Link to="/donate">Make a Donation</Link>
+              <Link to="/donate" className="block text-center">Make a Donation</Link>
             </Button>
             
             <Button 
               asChild
               variant="outline"
               size="lg"
-              className="border-2 border-white text-white hover:bg-white hover:text-teal-600 px-10 py-4 rounded-full font-semibold text-lg transition-all duration-300 hover:scale-105"
+              className="border-2 border-white text-white hover:bg-white hover:text-teal-600 px-8 py-3 rounded-full font-semibold text-lg transition-all duration-300 hover:scale-105 w-full sm:w-auto"
             >
-              <Link to="/contact">Get Involved</Link>
+              <Link to="/contact" className="block text-center">Get Involved</Link>
             </Button>
           </div>
         </div>
