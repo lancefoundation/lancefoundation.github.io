@@ -15,7 +15,7 @@ const Programs = () => {
       title: 'Healthcare Access Programs',
       icon: Stethoscope,
       description: 'Comprehensive healthcare services including mobile clinics, maternal health, and disease prevention programs.',
-      image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
       details: [
         'Mobile health clinics reaching remote communities',
         'Maternal and child health programs',
