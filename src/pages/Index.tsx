@@ -74,23 +74,23 @@ const Index = () => {
     <div className="min-h-screen">
       <Hero />
       
-      {/* Featured Projects Section */}
-      <section className={`py-16 bg-gray-50 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+      {/* Featured Projects Section - Reduced spacing and more elegant */}
+      <section className={`py-20 bg-gradient-to-b from-gray-50 to-white transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+          <div className="text-center mb-16 stagger-animation">
+            <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6 gradient-text">
               Transforming Communities Worldwide
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
               Through strategic partnerships and community-driven solutions, we're creating sustainable change that lasts for generations.
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
             {featuredProjects.map((project, index) => (
               <div 
                 key={index}
-                className="fade-in-up"
+                className="stagger-fade-in"
                 style={{ animationDelay: `${index * 0.2}s` }}
               >
                 <ProjectCard {...project} />
@@ -98,11 +98,11 @@ const Index = () => {
             ))}
           </div>
           
-          <div className="text-center mt-12">
+          <div className="text-center">
             <Button 
               asChild
               size="lg"
-              className="bg-teal-600 hover:bg-teal-700 text-white px-8 py-4 rounded-full transition-all duration-300 hover:scale-105"
+              className="bg-teal-600 hover:bg-teal-700 text-white px-10 py-4 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg"
             >
               <Link to="/projects">View All Projects</Link>
             </Button>
@@ -110,50 +110,50 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Impact Statistics */}
-      <section className="py-16 bg-white">
+      {/* Impact Statistics - More spacious and elegant */}
+      <section className="py-24 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6">
               Our Global Impact
             </h2>
-            <p className="text-xl text-gray-600">
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               Measurable change through strategic community development
             </p>
           </div>
           
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="text-center fade-in-up">
-              <div className="text-4xl sm:text-5xl font-bold text-teal-600 mb-2">108K+</div>
-              <div className="text-lg text-gray-600">Lives Transformed</div>
+            <div className="text-center floating-stats">
+              <div className="text-5xl sm:text-6xl font-bold text-teal-600 mb-3">108K+</div>
+              <div className="text-lg text-gray-600 font-medium">Lives Transformed</div>
             </div>
-            <div className="text-center fade-in-up" style={{ animationDelay: '0.1s' }}>
-              <div className="text-4xl sm:text-5xl font-bold text-green-600 mb-2">342</div>
-              <div className="text-lg text-gray-600">Projects Completed</div>
+            <div className="text-center floating-stats" style={{ animationDelay: '0.1s' }}>
+              <div className="text-5xl sm:text-6xl font-bold text-green-600 mb-3">342</div>
+              <div className="text-lg text-gray-600 font-medium">Projects Completed</div>
             </div>
-            <div className="text-center fade-in-up" style={{ animationDelay: '0.2s' }}>
-              <div className="text-4xl sm:text-5xl font-bold text-pink-500 mb-2">25</div>
-              <div className="text-lg text-gray-600">Countries Served</div>
+            <div className="text-center floating-stats" style={{ animationDelay: '0.2s' }}>
+              <div className="text-5xl sm:text-6xl font-bold text-pink-500 mb-3">25</div>
+              <div className="text-lg text-gray-600 font-medium">Countries Served</div>
             </div>
-            <div className="text-center fade-in-up" style={{ animationDelay: '0.3s' }}>
-              <div className="text-4xl sm:text-5xl font-bold text-teal-700 mb-2">15</div>
-              <div className="text-lg text-gray-600">Years of Service</div>
+            <div className="text-center floating-stats" style={{ animationDelay: '0.3s' }}>
+              <div className="text-5xl sm:text-6xl font-bold text-teal-700 mb-3">15</div>
+              <div className="text-lg text-gray-600 font-medium">Years of Service</div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Photo Gallery Preview */}
+      {/* Photo Gallery Preview - Reduced from previous version */}
       <PhotoGalleryPreview />
 
-      {/* Testimonials Section */}
-      <section className="py-16 bg-gradient-to-r from-teal-50 to-green-50">
+      {/* Testimonials Section - More elegant spacing */}
+      <section className="py-24 bg-gradient-to-r from-teal-50 via-green-50 to-blue-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6">
               Voices from the Field
             </h2>
-            <p className="text-xl text-gray-600">
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               Hear from the communities and partners we work alongside
             </p>
           </div>
@@ -162,7 +162,7 @@ const Index = () => {
             {testimonials.map((testimonial, index) => (
               <div 
                 key={index}
-                className="slide-in-right"
+                className="slide-in-elegant"
                 style={{ animationDelay: `${index * 0.2}s` }}
               >
                 <TestimonialCard {...testimonial} />
@@ -172,59 +172,22 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Our Approach Section */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-              Our Approach to Development
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
-              We believe in sustainable, community-driven solutions that create lasting change. Our programs are designed with local input and built for long-term success.
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl font-bold text-teal-600">1</span>
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Listen & Learn</h3>
-              <p className="text-gray-600">We start by understanding community needs, priorities, and existing resources through extensive consultation.</p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl font-bold text-green-600">2</span>
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Partner & Plan</h3>
-              <p className="text-gray-600">We collaborate with local leaders and organizations to design culturally appropriate and sustainable solutions.</p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl font-bold text-pink-500">3</span>
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Implement & Transfer</h3>
-              <p className="text-gray-600">We execute programs while building local capacity, ensuring communities can maintain and expand the work independently.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Call to Action Section */}
-      <section className="py-16 bg-gradient-to-r from-teal-600 to-green-600 text-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-6">
+      {/* Call to Action Section - More refined */}
+      <section className="py-20 bg-gradient-to-r from-teal-600 via-teal-700 to-green-600 text-white overflow-hidden relative">
+        <div className="absolute inset-0 bg-black/10"></div>
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-4xl sm:text-5xl font-bold mb-6 floating-text">
             Join Our Mission for Change
           </h2>
-          <p className="text-xl mb-8 opacity-90">
+          <p className="text-xl mb-10 opacity-90 max-w-3xl mx-auto leading-relaxed">
             Every contribution, whether financial or volunteer time, helps us create meaningful impact in communities that need it most.
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <Button 
               asChild
               size="lg"
-              className="bg-white text-teal-600 hover:bg-gray-100 px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 hover:scale-105"
+              className="bg-white text-teal-600 hover:bg-gray-100 px-10 py-4 rounded-full font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl"
             >
               <Link to="/donate">Make a Donation</Link>
             </Button>
@@ -233,7 +196,7 @@ const Index = () => {
               asChild
               variant="outline"
               size="lg"
-              className="border-2 border-white text-white hover:bg-white hover:text-teal-600 px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 hover:scale-105"
+              className="border-2 border-white text-white hover:bg-white hover:text-teal-600 px-10 py-4 rounded-full font-semibold text-lg transition-all duration-300 hover:scale-105"
             >
               <Link to="/contact">Get Involved</Link>
             </Button>
