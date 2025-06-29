@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main # Or your default branch where you push your code
+      - main # This workflow runs when you push to the 'main' branch
 
 jobs:
   build-and-deploy:
@@ -16,17 +16,17 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20' # Or a recent LTS version
+          node-version: '20' # Use a recent LTS Node.js version
 
       - name: Install dependencies
-        run: npm install # Or yarn install
+        run: npm install # Or yarn install if your project uses it
 
       - name: Build project
-        run: npm run build # This uses your updated vite.config.ts to build for the correct base path
+        run: npm run build # This command creates the 'dist' folder
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist # The folder containing your built site
-          publish_branch: gh-pages # This is the default branch GitHub Pages looks for when using Actions
+          publish_branch: gh-pages # This is the branch GitHub Pages uses for source
