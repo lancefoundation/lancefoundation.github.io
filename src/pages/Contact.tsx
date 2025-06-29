@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { MapPin, Phone, Mail, Clock, Send } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -28,23 +27,47 @@ const Contact = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    // Simulate form submission
-    setTimeout(() => {
-      toast({
-        title: "Message sent successfully!",
-        description: "Thank you for contacting us. We'll get back to you within 24 hours.",
-      });
+    // Simulate form submission - in real implementation, this would send to info@thelancefoundation.org
+    try {
+      // Here you would integrate with your email service
+      // Example: await sendEmail({
+      //   to: 'info@thelancefoundation.org',
+      //   from: formData.email,
+      //   subject: formData.subject,
+      //   html: `
+      //     <h3>New Contact Form Submission</h3>
+      //     <p><strong>Name:</strong> ${formData.name}</p>
+      //     <p><strong>Email:</strong> ${formData.email}</p>
+      //     <p><strong>Inquiry Type:</strong> ${formData.inquiryType}</p>
+      //     <p><strong>Subject:</strong> ${formData.subject}</p>
+      //     <p><strong>Message:</strong> ${formData.message}</p>
+      //   `
+      // });
       
-      // Reset form
-      setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        inquiryType: '',
-        message: ''
+      setTimeout(() => {
+        toast({
+          title: "Message sent successfully!",
+          description: "Thank you for contacting us. We'll get back to you within 24 hours at info@thelancefoundation.org.",
+        });
+        
+        // Reset form
+        setFormData({
+          name: '',
+          email: '',
+          subject: '',
+          inquiryType: '',
+          message: ''
+        });
+        setIsLoading(false);
+      }, 1000);
+    } catch (error) {
+      toast({
+        title: "Error sending message",
+        description: "Please try again or contact us directly at info@thelancefoundation.org",
+        variant: "destructive"
       });
       setIsLoading(false);
-    }, 1000);
+    }
   };
 
   const contactInfo = [
@@ -63,7 +86,7 @@ const Contact = () => {
     {
       icon: Mail,
       title: "Email Us",
-      details: ["info@hopefoundation.org", "We respond within 24 hours"],
+      details: ["info@thelancefoundation.org", "We respond within 24 hours"],
       color: "text-yellow-600"
     },
     {
@@ -74,6 +97,7 @@ const Contact = () => {
     }
   ];
 
+  // ... keep existing return JSX with the updated email references
   return (
     <div className="min-h-screen pt-16">
       {/* Hero Section */}
@@ -96,7 +120,7 @@ const Contact = () => {
               <CardHeader>
                 <CardTitle className="text-2xl">Send us a Message</CardTitle>
                 <p className="text-gray-600">
-                  Fill out the form below and we'll get back to you as soon as possible.
+                  Fill out the form below and we'll get back to you as soon as possible at info@thelancefoundation.org.
                 </p>
               </CardHeader>
               <CardContent>
@@ -174,7 +198,7 @@ const Contact = () => {
                     {isLoading ? (
                       <div className="flex items-center gap-2">
                         <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent" />
-                        Sending...
+                        Sending to info@thelancefoundation.org...
                       </div>
                     ) : (
                       <div className="flex items-center gap-2">

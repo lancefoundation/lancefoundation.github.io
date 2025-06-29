@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { ArrowDown } from 'lucide-react';
 import Hero from '@/components/Hero';
@@ -8,6 +7,7 @@ import PhotoGalleryPreview from '@/components/PhotoGalleryPreview';
 import Newsletter from '@/components/Newsletter';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
+import PartnersCarousel from '@/components/PartnersCarousel';
 
 const Index = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -42,7 +42,7 @@ const Index = () => {
       description: "Deploying mobile medical units to provide healthcare services to isolated island communities in the Philippines.",
       location: "Mindanao Islands, Philippines",
       date: "2024 - Upcoming",
-      image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      image: "https://images.unsplash.com/photo-1501854140801-50d01698950b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       category: "Healthcare",
       beneficiaries: 18000,
       status: "upcoming" as const
@@ -74,7 +74,7 @@ const Index = () => {
     <div className="min-h-screen">
       <Hero />
       
-      {/* Featured Projects Section - Reduced spacing and more elegant */}
+      {/* Featured Projects Section */}
       <section className={`py-20 bg-gradient-to-b from-gray-50 to-white transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16 stagger-animation">
@@ -110,7 +110,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Impact Statistics - More spacious and elegant */}
+      {/* Impact Statistics */}
       <section className="py-24 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -143,10 +143,13 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Photo Gallery Preview - Reduced from previous version */}
+      {/* Partners Carousel */}
+      <PartnersCarousel />
+
+      {/* Photo Gallery Preview */}
       <PhotoGalleryPreview />
 
-      {/* Testimonials Section - More elegant spacing */}
+      {/* Testimonials Section */}
       <section className="py-24 bg-gradient-to-r from-teal-50 via-green-50 to-blue-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -172,7 +175,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Call to Action Section - More refined */}
+      {/* Call to Action Section */}
       <section className="py-20 bg-gradient-to-r from-teal-600 via-teal-700 to-green-600 text-white overflow-hidden relative">
         <div className="absolute inset-0 bg-black/10"></div>
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

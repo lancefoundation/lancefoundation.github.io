@@ -25,15 +25,20 @@ const Hero = () => {
           <span className="text-green-300">Transforming Lives</span>
         </h1>
         
-        <p className="text-xl sm:text-2xl mb-8 opacity-90 max-w-3xl mx-auto slide-in-right">
+        <p className="text-xl sm:text-2xl mb-4 opacity-90 max-w-3xl mx-auto slide-in-right">
           The Lance Foundation works tirelessly to build stronger communities through education, healthcare, environmental conservation, and sustainable development programs worldwide.
         </p>
         
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+        {/* Motto */}
+        <div className="text-lg sm:text-xl mb-8 opacity-80 italic font-light">
+          "Service to Humanity is Service to God"
+        </div>
+        
+        <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12">
           <Button 
             asChild
             size="lg"
-            className="bg-green-500 hover:bg-green-600 text-gray-900 font-semibold px-8 py-4 rounded-full transition-all duration-300 hover:scale-105 pulse-glow"
+            className="bg-green-500 hover:bg-green-600 text-gray-900 font-semibold px-10 py-4 rounded-full transition-all duration-300 hover:scale-105 pulse-glow shadow-2xl min-w-[200px]"
           >
             <Link to="/donate">Donate Now</Link>
           </Button>
@@ -42,7 +47,7 @@ const Hero = () => {
             asChild
             variant="outline"
             size="lg"
-            className="border-white text-white hover:bg-white hover:text-gray-900 px-8 py-4 rounded-full transition-all duration-300 hover:scale-105"
+            className="border-2 border-white text-white hover:bg-white hover:text-gray-900 px-10 py-4 rounded-full transition-all duration-300 hover:scale-105 shadow-xl min-w-[200px]"
           >
             <Link to="/projects">View Our Work</Link>
           </Button>
@@ -53,18 +58,18 @@ const Hero = () => {
           <ImageCarousel />
         </div>
         
-        {/* Stats */}
+        {/* Stats with Counter Animation */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mt-16">
           <div className="text-center fade-in-up">
-            <div className="text-3xl sm:text-4xl font-bold text-green-300 mb-2">50,000+</div>
+            <div className="text-3xl sm:text-4xl font-bold text-green-300 mb-2 counter-animation" data-target="108000">0+</div>
             <div className="text-lg opacity-90">Lives Impacted</div>
           </div>
           <div className="text-center fade-in-up" style={{ animationDelay: '0.2s' }}>
-            <div className="text-3xl sm:text-4xl font-bold text-green-300 mb-2">120+</div>
+            <div className="text-3xl sm:text-4xl font-bold text-green-300 mb-2 counter-animation" data-target="342">0+</div>
             <div className="text-lg opacity-90">Projects Completed</div>
           </div>
           <div className="text-center fade-in-up" style={{ animationDelay: '0.4s' }}>
-            <div className="text-3xl sm:text-4xl font-bold text-green-300 mb-2">25</div>
+            <div className="text-3xl sm:text-4xl font-bold text-green-300 mb-2 counter-animation" data-target="25">0</div>
             <div className="text-lg opacity-90">Countries Served</div>
           </div>
         </div>
