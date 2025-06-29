@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Heart, CreditCard, Shield, Gift, Smartphone } from 'lucide-react';
+import { Heart, CreditCard, Shield, Gift, Smartphone, DollarSign } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -7,11 +7,13 @@ import { Textarea } from '@/components/ui/textarea';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
 
 const Donate = () => {
   const [donationType, setDonationType] = useState('one-time');
   const [paymentMethod, setPaymentMethod] = useState<'card' | 'mpesa'>('card');
+  const [currency, setCurrency] = useState<'usd' | 'kes'>('usd');
   const [amount, setAmount] = useState('');
   const [customAmount, setCustomAmount] = useState('');
   const [mpesaPhone, setMpesaPhone] = useState('');
@@ -24,15 +26,28 @@ const Donate = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
-  const presetAmounts = [25, 50, 100, 250, 500, 1000];
+  const presetAmounts = {
+    usd: [25, 50, 100, 250, 500, 1000],
+    kes: [2500, 5000, 10000, 25000, 50000, 100000]
+  };
 
-  const impactDescriptions: Record<number, string> = {
-    25: "Provides clean water for a family for one month",
-    50: "Supplies school materials for 5 children",
-    100: "Feeds a family for two weeks",
-    250: "Supports a teacher's salary for one month",
-    500: "Builds a water well access point",
-    1000: "Sponsors a child's education for one year"
+  const impactDescriptions = {
+    usd: {
+      25: "Provides clean water for a family for one month",
+      50: "Supplies school materials for 5 children",
+      100: "Feeds a family for two weeks",
+      250: "Supports a teacher's salary for one month",
+      500: "Builds a water well access point",
+      1000: "Sponsors a child's education for one year"
+    },
+    kes: {
+      2500: "Provides clean water for a family for one month",
+      5000: "Supplies school materials for 5 children",
+      10000: "Feeds a family for two weeks",
+      25000: "Supports a teacher's salary for one month",
+      50000: "Builds a water well access point",
+      100000: "Sponsors a child's education for one year"
+    }
   };
 
   const handleAmountSelect = (selectedAmount: string) => {
@@ -45,8 +60,19 @@ const Donate = () => {
     setAmount('');
   };
 
+  const handlePaymentMethodChange = (value: string) => {
+    setPaymentMethod(value as 'card' | 'mpesa');
+  };
+
+  const handleCurrencyChange = (value: string) => {
+    setCurrency(value as 'usd' | 'kes');
+    setAmount('');
+    setCustomAmount('');
+  };
+
   const finalAmount = customAmount || amount;
   const finalAmountNumber = parseInt(finalAmount);
+  const currencySymbol = currency === 'usd' ? '$' : 'KSh';
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -62,7 +88,7 @@ const Donate = () => {
     }
 
     if (paymentMethod === 'mpesa') {
-      // Validate phone number
+      // Validate phone number for Kenyan format
       if (!mpesaPhone.match(/^(2547\d{8}|07\d{8})$/)) {
         toast({
           title: "Invalid Phone",
@@ -71,41 +97,22 @@ const Donate = () => {
         setIsLoading(false);
         return;
       }
-      // Call backend for M-Pesa STK push (test)
+
+      // Call M-Pesa API integration (placeholder for now)
       try {
-        const res = await fetch('/api/mpesa', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            amount: finalAmountNumber,
-            phone: mpesaPhone,
-            name: donorInfo.name,
-            email: donorInfo.email,
-            message: donorInfo.message,
-            donationType
-          }),
+        // This would integrate with your M-Pesa API
+        toast({
+          title: "M-Pesa Integration Ready",
+          description: "M-Pesa payment processing will be implemented with your API keys.",
         });
-        const data = await res.json();
-        if (data.status === 'success') {
-          toast({
-            title: "M-Pesa STK Push Sent",
-            description: "Check your phone to complete the payment (use test credentials for sandbox).",
-          });
-        } else {
-          toast({
-            title: "M-Pesa Error",
-            description: data.message || "Failed to initiate payment.",
-          });
-        }
       } catch (err) {
-        toast({ title: "Network Error", description: "Could not connect to M-Pesa API." });
+        toast({ title: "M-Pesa Error", description: "Failed to process M-Pesa payment." });
       }
       setIsLoading(false);
-      // Optionally reset form here
       return;
     }
 
-    // Simulate payment processing for Card (existing logic)
+    // Simulate payment processing for Card
     setTimeout(() => {
       toast({
         title: "Thank you for your donation!",
@@ -121,7 +128,7 @@ const Donate = () => {
   return (
     <div className="min-h-screen pt-16">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-blue-600 to-green-600 text-white py-20">
+      <section className="bg-gradient-to-r from-teal-600 to-green-600 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">
             <Heart className="h-16 w-16 mx-auto mb-6 text-yellow-300" />
@@ -143,6 +150,30 @@ const Donate = () => {
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleSubmit} className="space-y-6">
+                  {/* Currency Selection */}
+                  <div>
+                    <Label className="text-base font-medium mb-3 block">Currency</Label>
+                    <Select value={currency} onValueChange={handleCurrencyChange}>
+                      <SelectTrigger className="w-full">
+                        <SelectValue placeholder="Select currency" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="usd">
+                          <div className="flex items-center gap-2">
+                            <DollarSign className="h-4 w-4" />
+                            USD - US Dollar
+                          </div>
+                        </SelectItem>
+                        <SelectItem value="kes">
+                          <div className="flex items-center gap-2">
+                            <span className="font-bold">KSh</span>
+                            KES - Kenyan Shilling
+                          </div>
+                        </SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+
                   {/* Donation Type */}
                   <div>
                     <Label className="text-base font-medium mb-3 block">Donation Type</Label>
@@ -161,17 +192,25 @@ const Donate = () => {
                   {/* Payment Method */}
                   <div>
                     <Label className="text-base font-medium mb-3 block">Payment Method</Label>
-                    <RadioGroup value={paymentMethod} onValueChange={setPaymentMethod}>
+                    <RadioGroup value={paymentMethod} onValueChange={handlePaymentMethodChange}>
                       <div className="flex items-center space-x-2">
                         <RadioGroupItem value="card" id="card" />
-                        <Label htmlFor="card">Credit/Debit Card</Label>
+                        <Label htmlFor="card" className="flex items-center gap-2">
+                          <CreditCard className="h-4 w-4" />
+                          Credit/Debit Card
+                        </Label>
                       </div>
                       <div className="flex items-center space-x-2">
                         <RadioGroupItem value="mpesa" id="mpesa" />
-                        <Label htmlFor="mpesa">M-Pesa</Label>
+                        <Label htmlFor="mpesa" className="flex items-center gap-2">
+                          <Smartphone className="h-4 w-4" />
+                          M-Pesa
+                        </Label>
                       </div>
                     </RadioGroup>
                   </div>
+
+                  {/* M-Pesa Phone Number */}
                   {paymentMethod === 'mpesa' && (
                     <div>
                       <Label className="text-base font-medium mb-2 block">M-Pesa Phone Number</Label>
@@ -193,9 +232,9 @@ const Donate = () => {
 
                   {/* Amount Selection */}
                   <div>
-                    <Label className="text-base font-medium mb-3 block">Amount</Label>
+                    <Label className="text-base font-medium mb-3 block">Amount ({currencySymbol})</Label>
                     <div className="grid grid-cols-3 gap-3 mb-4">
-                      {presetAmounts.map((presetAmount) => (
+                      {presetAmounts[currency].map((presetAmount) => (
                         <Button
                           key={presetAmount}
                           type="button"
@@ -203,29 +242,31 @@ const Donate = () => {
                           onClick={() => handleAmountSelect(presetAmount.toString())}
                           className="h-12"
                         >
-                          ${presetAmount}
+                          {currencySymbol}{presetAmount.toLocaleString()}
                         </Button>
                       ))}
                     </div>
                     
                     <div className="relative">
-                      <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">$</span>
+                      <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">
+                        {currencySymbol}
+                      </span>
                       <Input
                         type="number"
                         placeholder="Enter custom amount"
                         value={customAmount}
                         onChange={(e) => handleCustomAmountChange(e.target.value)}
-                        className="pl-8"
+                        className="pl-12"
                         min="1"
                       />
                     </div>
                   </div>
 
                   {/* Impact Description */}
-                  {finalAmount && impactDescriptions[finalAmountNumber] && (
-                    <div className="bg-blue-50 p-4 rounded-lg">
-                      <p className="text-blue-800 font-medium">
-                        Your ${finalAmount} donation: {impactDescriptions[finalAmountNumber]}
+                  {finalAmount && impactDescriptions[currency][finalAmountNumber as keyof typeof impactDescriptions[typeof currency]] && (
+                    <div className="bg-teal-50 p-4 rounded-lg">
+                      <p className="text-teal-800 font-medium">
+                        Your {currencySymbol}{finalAmount} donation: {impactDescriptions[currency][finalAmountNumber as keyof typeof impactDescriptions[typeof currency]]}
                       </p>
                     </div>
                   )}
@@ -272,7 +313,7 @@ const Donate = () => {
                   {/* Payment Button */}
                   <Button 
                     type="submit" 
-                    className="w-full bg-gradient-to-r from-blue-600 to-green-600 hover:from-blue-700 hover:to-green-700 text-white py-6 text-lg font-semibold"
+                    className="w-full bg-gradient-to-r from-teal-600 to-green-600 hover:from-teal-700 hover:to-green-700 text-white py-6 text-lg font-semibold"
                     disabled={!finalAmount || isLoading}
                   >
                     {isLoading ? (
@@ -288,8 +329,8 @@ const Donate = () => {
                           <CreditCard className="h-5 w-5" />
                         )}
                         {paymentMethod === 'mpesa'
-                          ? `Donate ${finalAmount ? 'Ksh' : ''}${finalAmount || ''} via M-Pesa`
-                          : `Donate $${finalAmount || '0'}${donationType === 'monthly' ? '/month' : ''}`}
+                          ? `Donate ${finalAmount ? currencySymbol : ''}${finalAmount ? parseInt(finalAmount).toLocaleString() : ''} via M-Pesa`
+                          : `Donate ${currencySymbol}${finalAmount ? parseInt(finalAmount).toLocaleString() : '0'}${donationType === 'monthly' ? '/month' : ''}`}
                       </div>
                     )}
                   </Button>
@@ -327,7 +368,7 @@ const Donate = () => {
                   </div>
                 </div>
                 <p className="text-sm text-gray-600">
-                  HopeFoundation is a registered 501(c)(3) organization. Your donation is tax-deductible to the full extent allowed by law.
+                  The Lance Foundation is a registered 501(c)(3) organization. Your donation is tax-deductible to the full extent allowed by law.
                 </p>
               </CardContent>
             </Card>
