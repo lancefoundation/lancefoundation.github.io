@@ -8,33 +8,33 @@ const Leadership = () => {
   const leaders = [
     {
       name: "Dr. Denis Gathua",
-      role: "Founder & Executive Director",
+      role: "Founder & Chief Executive Office",
       image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-      bio: "Dr. Lance Williams founded The Lance Foundation in 2008 with a vision to create sustainable change in underserved communities worldwide. With over 20 years of experience in international development, he has led transformative projects across Africa, Asia, and Latin America.",
-      education: "Ph.D. in International Development, Harvard University",
-      experience: "Former Director of Global Health Initiatives at WHO",
+      bio: "Denis Gathua founded The Lance Foundation in 2019 with a vision to create sustainable change in underserved communities worldwide. With over 20 years of experience in international development, he has led transformative projects across Africa, Asia, and Latin America.",
+      education: "Bsc. in Information Technology, Masinde Muliro University of Science and technology",
+      experience: "IT Incident Manager at Sportserve",
       achievements: [
-        "Led development of clean water systems serving 50,000+ people",
-        "Established 25 healthcare clinics in rural communities",
+        "Led development of descent housing for a Mother with 5 Autistic Kids in Nyandarua County",
+        "Established 19 Charity Events all over the Country",
         "Recipient of the Global Humanitarian Award 2020"
       ],
-      email: "lance.williams@thelancefoundation.org",
-      linkedin: "https://linkedin.com/in/lance-williams"
+      email: "denis.gathua@thelancefoundation.org",
+      linkedin: "https://linkedin.com/in/denisgathua"
     },
     {
-      name: "Dr. Sarah Johnson",
-      role: "Chief Program Officer",
+      name: "Bonface Itimu Maina",
+      role: "Executive Director",
       image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-      bio: "Dr. Sarah Johnson oversees all program implementation and evaluation across our global operations. Her expertise in public health and community development has been instrumental in achieving our mission outcomes.",
-      education: "M.D. from Johns Hopkins, MPH from Columbia University",
-      experience: "15+ years in international health and development",
+      bio: "Bonface Itimu Maina oversees all program implementation and evaluation across our global operations. His expertise in community development has been instrumental in achieving our mission outcomes.",
+      education: "B.Arts. from Masinde Muliro University of Science and technology",
+      experience: "5+ years in Community Development and Public Administration",
       achievements: [
         "Developed evidence-based program evaluation frameworks",
         "Led maternal health initiatives reaching 30,000+ women",
         "Published 25+ peer-reviewed articles on global health"
       ],
-      email: "sarah.johnson@thelancefoundation.org",
-      linkedin: "https://linkedin.com/in/sarah-johnson-md"
+      email: "itimu.maina@thelancefoundation.org",
+      linkedin: "https://linkedin.com/in/bonfaceitimu"
     },
     {
       name: "Michael Chen",
@@ -50,7 +50,7 @@ const Leadership = () => {
       ],
       email: "michael.chen@thelancefoundation.org",
       linkedin: "https://linkedin.com/in/michael-chen-ops"
-    },
+    }, /**
     {
       name: "Dr. Elena Rodriguez",
       role: "Medical Director",
@@ -65,28 +65,28 @@ const Leadership = () => {
       ],
       email: "elena.rodriguez@thelancefoundation.org",
       linkedin: "https://linkedin.com/in/elena-rodriguez-md"
-    },
+    }, **/
     {
-      name: "James Thompson",
+      name: "Mary Wanjiku kariuki",
       role: "Chief Financial Officer",
       image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-      bio: "James Thompson ensures financial transparency and accountability across all foundation operations. His background in nonprofit finance and audit has strengthened our financial management and donor relations.",
-      education: "CPA, MBA in Finance from Northwestern Kellogg",
-      experience: "20+ years in nonprofit financial management",
+      bio: "Mary Wanjiku kariuki ensures financial transparency and accountability across all foundation operations. Her background in nonprofit finance and audit has strengthened our financial management and donor relations.",
+      education: "B.Arts ,Kenyatta University",
+      experience: "7+ years in nonprofit financial management",
       achievements: [
         "Achieved 4-star rating from Charity Navigator",
         "Implemented comprehensive financial tracking systems",
-        "Managed $25M+ in annual program funding"
+        "Managed Foundations annual program funding and budgetary Allocations"
       ],
-      email: "james.thompson@thelancefoundation.org",
-      linkedin: "https://linkedin.com/in/james-thompson-cpa"
+      email: "wanjiku.kariuki@thelancefoundation.org",
+      linkedin: "https://linkedin.com/in/wanjikukariuki"
     },
     {
-      name: "Maria Santos",
-      role: "Director of Community Engagement",
+      name: "Njambi Gaitho",
+      role: "Communication and Digital Creatives",
       image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-      bio: "Maria Santos leads our community engagement efforts, ensuring programs are culturally appropriate and community-driven. Her background in anthropology and development studies brings valuable insights to our work.",
-      education: "Ph.D. in Cultural Anthropology, M.A. in Development Studies",
+      bio: "Njambi Gaitho leads our community engagement efforts, ensuring programs are culturally appropriate and community-driven. Her background in anthropology and development studies brings valuable insights to our work.",
+      education: "B.Arts. in Journalism Studies",
       experience: "14+ years in community development and cultural research",
       achievements: [
         "Developed community participation frameworks",
