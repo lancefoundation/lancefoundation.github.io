@@ -74,13 +74,13 @@ const Contact = () => {
     {
       icon: MapPin,
       title: "Visit Us",
-      details: ["123 Hope Street", "New York, NY 10001", "United States"],
+      details: ["Delamare Flats", "Nairobi, Milimani Road", "Kenya"],
       color: "text-blue-600"
     },
     {
       icon: Phone,
       title: "Call Us",
-      details: ["+1 (234) 567-8900", "Mon-Fri: 9AM-6PM EST"],
+      details: ["+254 794 091 339", "Mon-Fri: 9AM-6PM UTC +3"],
       color: "text-green-600"
     },
     {
@@ -92,7 +92,7 @@ const Contact = () => {
     {
       icon: Clock,
       title: "Office Hours",
-      details: ["Monday - Friday: 9AM - 6PM", "Saturday: 10AM - 4PM", "Sunday: Closed"],
+      details: ["Monday - Friday: 9AM - 6PM", "Saturday: 9AM - 12PM", "Sunday: Closed"],
       color: "text-purple-600"
     }
   ];
