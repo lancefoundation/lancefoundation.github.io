@@ -116,9 +116,9 @@ const Footer = () => {
                   <MapPin className="h-5 w-5 text-teal-400" />
                 </div>
                 <div className="text-gray-300 text-sm leading-relaxed">
-                  123 Hope Street<br />
-                  New York, NY 10001<br />
-                  United States
+                  Delamare Flats<br />
+                  Nairobi<br />
+                 Kenya
                 </div>
               </div>
               <div className="flex items-center gap-4 group">
@@ -149,9 +149,9 @@ const Footer = () => {
                 © 2024 The Lance Foundation. All rights reserved.
               </p>
               <div className="flex space-x-1 text-xs text-gray-500">
-                <span>Reg. #12345678</span>
+                <span>Reg. OP.218/051/21-491/13583 </span>
                 <span>•</span>
-                <span>EIN: 12-3456789</span>
+                <span>Bank Account Number: 9848930018 | NCBA Bank | KES Account</span>
               </div>
             </div>
             <div className="flex items-center space-x-6">
