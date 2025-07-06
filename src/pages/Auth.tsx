@@ -12,15 +12,14 @@ const Auth = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { signIn, signUp, signInWithGoogle, user } = useAuth();
-  const { toast } = useToast();
+    const { user, loading } = useAuth();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (user) {
+   useEffect(() => {
+    if (!loading && user) {
       navigate('/dashboard');
     }
-  }, [user, navigate]);
+  }, [user, loading, navigate]);
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
