@@ -74,6 +74,13 @@ const Navbar = () => {
                 Donate
               </Link>
             </Button>
+            
+            {/* Login Button */}
+            <Button asChild variant="outline" className="ml-2">
+              <Link to="/auth" className="flex items-center gap-2">
+                Login
+              </Link>
+            </Button>
           </div>
 
           {/* Mobile menu button */}
@@ -117,6 +124,11 @@ const Navbar = () => {
                   <Link to="/donate" onClick={() => setIsOpen(false)} className="flex items-center justify-center gap-2">
                     <Heart className="h-4 w-4" />
                     Donate Now
+                  </Link>
+                </Button>
+                <Button asChild variant="outline" className="w-full mt-2">
+                  <Link to="/auth" onClick={() => setIsOpen(false)} className="flex items-center justify-center gap-2">
+                    Login
                   </Link>
                 </Button>
               </div>
