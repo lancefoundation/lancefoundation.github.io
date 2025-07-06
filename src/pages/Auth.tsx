@@ -12,8 +12,7 @@ const Auth = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [fullName, setFullName] = useState('');
-  const { signIn, signUp, user } = useAuth();
+  const { signIn, signUp, signInWithGoogle, user } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
 
@@ -26,10 +25,10 @@ const Auth = () => {
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    
+
     try {
       const { error } = await signIn(email, password);
-      
+
       if (error) {
         toast({
           title: "Sign In Failed",
@@ -57,10 +56,10 @@ const Auth = () => {
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    
+
     try {
-      const { error } = await signUp(email, password, fullName);
-      
+      const { error } = await signUp(email, password);
+
       if (error) {
         toast({
           title: "Sign Up Failed",
@@ -84,6 +83,19 @@ const Auth = () => {
     }
   };
 
+  const handleGoogleSignIn = async () => {
+    setIsLoading(true);
+    const { error } = await signInWithGoogle();
+    setIsLoading(false);
+    if (error) {
+      toast({
+        title: "Google Sign In Failed",
+        description: error.message,
+        variant: "destructive",
+      });
+    }
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-background p-4">
       <Card className="w-full max-w-md">
@@ -97,7 +109,7 @@ const Auth = () => {
               <TabsTrigger value="signin">Sign In</TabsTrigger>
               <TabsTrigger value="signup">Sign Up</TabsTrigger>
             </TabsList>
-            
+
             <TabsContent value="signin">
               <form onSubmit={handleSignIn} className="space-y-4">
                 <div className="space-y-2">
@@ -122,25 +134,22 @@ const Auth = () => {
                     required
                   />
                 </div>
-                <Button type="submit" className="w-full" disabled={isLoading}>
-                  {isLoading ? "Signing In..." : "Sign In"}
+                <Button className="w-full" type="submit" disabled={isLoading}>
+                  Sign In
+                </Button>
+                <Button className="w-full" variant="outline" type="button" onClick={handleGoogleSignIn} disabled={isLoading}>
+                  Sign in with Google
                 </Button>
               </form>
+              <div className="mt-4 text-center">
+                <Link to="/forgot-password" className="text-sm text-blue-600 hover:underline">
+                  Forgot password?
+                </Link>
+              </div>
             </TabsContent>
-            
+
             <TabsContent value="signup">
               <form onSubmit={handleSignUp} className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="signup-name">Full Name</Label>
-                  <Input
-                    id="signup-name"
-                    type="text"
-                    placeholder="Enter your full name"
-                    value={fullName}
-                    onChange={(e) => setFullName(e.target.value)}
-                    required
-                  />
-                </div>
                 <div className="space-y-2">
                   <Label htmlFor="signup-email">Email</Label>
                   <Input
@@ -157,25 +166,21 @@ const Auth = () => {
                   <Input
                     id="signup-password"
                     type="password"
-                    placeholder="Create a password"
+                    placeholder="Enter your password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
-                    minLength={6}
                   />
                 </div>
-                <Button type="submit" className="w-full" disabled={isLoading}>
-                  {isLoading ? "Creating Account..." : "Sign Up"}
+                <Button className="w-full" type="submit" disabled={isLoading}>
+                  Sign Up
+                </Button>
+                <Button className="w-full" variant="outline" type="button" onClick={handleGoogleSignIn} disabled={isLoading}>
+                  Sign up with Google
                 </Button>
               </form>
             </TabsContent>
           </Tabs>
-          
-          <div className="mt-4 text-center">
-            <Link to="/" className="text-sm text-muted-foreground hover:underline">
-              Back to Home
-            </Link>
-          </div>
         </CardContent>
       </Card>
     </div>
