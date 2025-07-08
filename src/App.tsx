@@ -15,6 +15,8 @@ import Leadership from "./pages/Leadership";
 import Gallery from "./pages/Gallery";
 import Donate from "./pages/Donate";
 import Contact from "./pages/Contact";
+import Careers from "./pages/Careers";
+import CareersManagement from "./pages/CareersManagement";
 import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
 import RoleManagement from "./pages/RoleManagement";
@@ -34,6 +36,7 @@ const App = () => (
             <Route path="/auth" element={<Auth />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/admin/roles" element={<RoleManagement />} />
+            <Route path="/admin/careers" element={<CareersManagement />} />
             
             {/* Public Routes with Layout */}
             <Route path="/*" element={
@@ -48,6 +51,7 @@ const App = () => (
                     <Route path="/impact" element={<Impact />} />
                     <Route path="/leadership" element={<Leadership />} />
                     <Route path="/gallery" element={<Gallery />} />
+                    <Route path="/careers" element={<Careers />} />
                     <Route path="/donate" element={<Donate />} />
                     <Route path="/contact" element={<Contact />} />
                     <Route path="*" element={<NotFound />} />
