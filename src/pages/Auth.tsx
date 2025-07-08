@@ -13,7 +13,7 @@ const Auth = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { toast } = useToast();
-    const { user, loading } = useAuth();
+  const { user, loading, signIn, signUp, signInWithGoogle } = useAuth();
   const navigate = useNavigate();
 
    useEffect(() => {
