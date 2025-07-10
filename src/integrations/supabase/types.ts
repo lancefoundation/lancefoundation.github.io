@@ -14,6 +14,53 @@ export type Database = {
   }
   public: {
     Tables: {
+      communication_logs: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          message_type: string | null
+          recipient_ids: string[] | null
+          sender_id: string | null
+          sent_at: string | null
+          status: string | null
+          subject: string | null
+          template_used: string | null
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: string
+          message_type?: string | null
+          recipient_ids?: string[] | null
+          sender_id?: string | null
+          sent_at?: string | null
+          status?: string | null
+          subject?: string | null
+          template_used?: string | null
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          message_type?: string | null
+          recipient_ids?: string[] | null
+          sender_id?: string | null
+          sent_at?: string | null
+          status?: string | null
+          subject?: string | null
+          template_used?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "communication_logs_template_used_fkey"
+            columns: ["template_used"]
+            isOneToOne: false
+            referencedRelation: "email_templates"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       content_pages: {
         Row: {
           content: string | null
@@ -148,6 +195,54 @@ export type Database = {
         }
         Relationships: []
       }
+      impact_reports: {
+        Row: {
+          charts_data: Json | null
+          content: string | null
+          created_at: string
+          generated_by: string | null
+          id: string
+          metrics: Json | null
+          period_end: string
+          period_start: string
+          published_at: string | null
+          report_type: string | null
+          status: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          charts_data?: Json | null
+          content?: string | null
+          created_at?: string
+          generated_by?: string | null
+          id?: string
+          metrics?: Json | null
+          period_end: string
+          period_start: string
+          published_at?: string | null
+          report_type?: string | null
+          status?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          charts_data?: Json | null
+          content?: string | null
+          created_at?: string
+          generated_by?: string | null
+          id?: string
+          metrics?: Json | null
+          period_end?: string
+          period_start?: string
+          published_at?: string | null
+          report_type?: string | null
+          status?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       job_applications: {
         Row: {
           applicant_email: string
@@ -258,6 +353,60 @@ export type Database = {
           status?: string | null
           title?: string
           updated_at?: string
+        }
+        Relationships: []
+      }
+      media_library: {
+        Row: {
+          alt_text: string | null
+          caption: string | null
+          created_at: string
+          file_size: number
+          file_type: string
+          filename: string
+          folder_path: string | null
+          id: string
+          is_public: boolean | null
+          mime_type: string
+          original_name: string
+          tags: string[] | null
+          updated_at: string
+          uploaded_by: string | null
+          url: string
+        }
+        Insert: {
+          alt_text?: string | null
+          caption?: string | null
+          created_at?: string
+          file_size: number
+          file_type: string
+          filename: string
+          folder_path?: string | null
+          id?: string
+          is_public?: boolean | null
+          mime_type: string
+          original_name: string
+          tags?: string[] | null
+          updated_at?: string
+          uploaded_by?: string | null
+          url: string
+        }
+        Update: {
+          alt_text?: string | null
+          caption?: string | null
+          created_at?: string
+          file_size?: number
+          file_type?: string
+          filename?: string
+          folder_path?: string | null
+          id?: string
+          is_public?: boolean | null
+          mime_type?: string
+          original_name?: string
+          tags?: string[] | null
+          updated_at?: string
+          uploaded_by?: string | null
+          url?: string
         }
         Relationships: []
       }
@@ -466,6 +615,62 @@ export type Database = {
           },
         ]
       }
+      volunteer_management: {
+        Row: {
+          coordinator_id: string | null
+          created_at: string
+          hours_logged: number | null
+          id: string
+          last_activity_date: string | null
+          performance_notes: string | null
+          project_id: string | null
+          role_assigned: string | null
+          status: string | null
+          tasks_assigned: string[] | null
+          tasks_completed: string[] | null
+          updated_at: string
+          volunteer_id: string | null
+        }
+        Insert: {
+          coordinator_id?: string | null
+          created_at?: string
+          hours_logged?: number | null
+          id?: string
+          last_activity_date?: string | null
+          performance_notes?: string | null
+          project_id?: string | null
+          role_assigned?: string | null
+          status?: string | null
+          tasks_assigned?: string[] | null
+          tasks_completed?: string[] | null
+          updated_at?: string
+          volunteer_id?: string | null
+        }
+        Update: {
+          coordinator_id?: string | null
+          created_at?: string
+          hours_logged?: number | null
+          id?: string
+          last_activity_date?: string | null
+          performance_notes?: string | null
+          project_id?: string | null
+          role_assigned?: string | null
+          status?: string | null
+          tasks_assigned?: string[] | null
+          tasks_completed?: string[] | null
+          updated_at?: string
+          volunteer_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "volunteer_management_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       volunteer_roles: {
         Row: {
           created_at: string
@@ -499,6 +704,51 @@ export type Database = {
           requirements?: string | null
           title?: string
           updated_at?: string
+        }
+        Relationships: []
+      }
+      website_analytics: {
+        Row: {
+          avg_session_duration: number | null
+          bounce_rate: number | null
+          country: string | null
+          created_at: string
+          date: string
+          device_type: string | null
+          id: string
+          page_path: string
+          page_views: number | null
+          referrer_source: string | null
+          updated_at: string
+          visitors: number | null
+        }
+        Insert: {
+          avg_session_duration?: number | null
+          bounce_rate?: number | null
+          country?: string | null
+          created_at?: string
+          date: string
+          device_type?: string | null
+          id?: string
+          page_path: string
+          page_views?: number | null
+          referrer_source?: string | null
+          updated_at?: string
+          visitors?: number | null
+        }
+        Update: {
+          avg_session_duration?: number | null
+          bounce_rate?: number | null
+          country?: string | null
+          created_at?: string
+          date?: string
+          device_type?: string | null
+          id?: string
+          page_path?: string
+          page_views?: number | null
+          referrer_source?: string | null
+          updated_at?: string
+          visitors?: number | null
         }
         Relationships: []
       }

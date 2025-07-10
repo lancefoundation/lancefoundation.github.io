@@ -11,6 +11,9 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Switch } from '@/components/ui/switch';
 import { supabase } from '@/integrations/supabase/client';
+import WebsiteAnalytics from '@/components/admin/WebsiteAnalytics';
+import MediaLibrary from '@/components/admin/MediaLibrary';
+import VolunteerCoordination from '@/components/admin/VolunteerCoordination';
 import { 
   FileText, 
   Image, 
@@ -273,7 +276,7 @@ const AdminCMS = () => {
 
       <div className="container mx-auto px-6 py-8">
         <Tabs defaultValue="pages" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-4">
+          <TabsList className="grid w-full grid-cols-6">
             <TabsTrigger value="pages">
               <FileText className="h-4 w-4 mr-2" />
               Pages
@@ -282,9 +285,17 @@ const AdminCMS = () => {
               <FileImage className="h-4 w-4 mr-2" />
               Media Library
             </TabsTrigger>
+            <TabsTrigger value="volunteers">
+              <Users className="h-4 w-4 mr-2" />
+              Volunteers
+            </TabsTrigger>
             <TabsTrigger value="analytics">
               <BarChart3 className="h-4 w-4 mr-2" />
               Analytics
+            </TabsTrigger>
+            <TabsTrigger value="reports">
+              <Target className="h-4 w-4 mr-2" />
+              Impact Reports
             </TabsTrigger>
             <TabsTrigger value="settings">
               <Settings className="h-4 w-4 mr-2" />
@@ -497,30 +508,27 @@ const AdminCMS = () => {
           </TabsContent>
 
           <TabsContent value="media">
-            <Card>
-              <CardHeader>
-                <CardTitle>Media Library</CardTitle>
-                <CardDescription>Manage images, videos, and other media files</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="text-center py-12">
-                  <Upload className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                  <p className="text-muted-foreground">Media library coming soon...</p>
-                </div>
-              </CardContent>
-            </Card>
+            <MediaLibrary />
+          </TabsContent>
+
+          <TabsContent value="volunteers">
+            <VolunteerCoordination />
           </TabsContent>
 
           <TabsContent value="analytics">
+            <WebsiteAnalytics />
+          </TabsContent>
+
+          <TabsContent value="reports">
             <Card>
               <CardHeader>
-                <CardTitle>Website Analytics</CardTitle>
-                <CardDescription>Track website performance and visitor behavior</CardDescription>
+                <CardTitle>Impact Reports</CardTitle>
+                <CardDescription>Generate and publish impact reports</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="text-center py-12">
-                  <BarChart3 className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                  <p className="text-muted-foreground">Analytics dashboard coming soon...</p>
+                  <Target className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+                  <p className="text-muted-foreground">Impact reports builder coming soon...</p>
                 </div>
               </CardContent>
             </Card>
