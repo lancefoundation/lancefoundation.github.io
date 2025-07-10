@@ -16,7 +16,14 @@ import {
   Settings,
   UserCheck,
   Mail,
-  Clock
+  Clock,
+  DollarSign,
+  Target,
+  Heart,
+  Award,
+  BarChart3,
+  PlusCircle,
+  Eye
 } from 'lucide-react';
 
 interface DashboardStats {
@@ -24,8 +31,16 @@ interface DashboardStats {
   activeJobs: number;
   totalApplications: number;
   pendingApplications: number;
+  totalProjects: number;
+  activeProjects: number;
+  totalDonations: number;
+  totalDonationAmount: number;
+  totalVolunteers: number;
+  pendingVolunteers: number;
   recentApplications: any[];
   recentJobs: any[];
+  recentDonations: any[];
+  recentProjects: any[];
 }
 
 const Dashboard = () => {
@@ -93,16 +108,59 @@ const Dashboard = () => {
         .select('*')
         .eq('status', 'pending');
 
+      // Fetch project statistics
+      const { data: allProjects } = await supabase
+        .from('projects')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      const { data: activeProjects } = await supabase
+        .from('projects')
+        .select('*')
+        .eq('status', 'active');
+
+      // Fetch donation statistics
+      const { data: allDonations } = await supabase
+        .from('donations')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      const totalDonationAmount = allDonations?.reduce((sum, donation) => sum + Number(donation.amount), 0) || 0;
+
+      // Fetch volunteer statistics
+      const { data: allVolunteers } = await supabase
+        .from('volunteer_applications')
+        .select(`
+          *,
+          volunteer_roles (title)
+        `)
+        .order('applied_at', { ascending: false });
+
+      const { data: pendingVolunteers } = await supabase
+        .from('volunteer_applications')
+        .select('*')
+        .eq('status', 'pending');
+
       const recentApplications = allApplications?.slice(0, 5) || [];
       const recentJobs = allJobs?.slice(0, 5) || [];
+      const recentDonations = allDonations?.slice(0, 5) || [];
+      const recentProjects = allProjects?.slice(0, 5) || [];
 
       setStats({
         totalJobs: allJobs?.length || 0,
         activeJobs: activeJobs?.length || 0,
         totalApplications: allApplications?.length || 0,
         pendingApplications: pendingApplications?.length || 0,
+        totalProjects: allProjects?.length || 0,
+        activeProjects: activeProjects?.length || 0,
+        totalDonations: allDonations?.length || 0,
+        totalDonationAmount,
+        totalVolunteers: allVolunteers?.length || 0,
+        pendingVolunteers: pendingVolunteers?.length || 0,
         recentApplications,
         recentJobs,
+        recentDonations,
+        recentProjects,
       });
 
       setPageLoading(false);
@@ -185,6 +243,14 @@ const Dashboard = () => {
                 <UserCheck className="h-4 w-4 mr-2" />
                 Manage Users
               </Button>
+              <Button
+                onClick={() => window.open('/projects', '_blank')}
+                variant="outline"
+                className="hidden md:flex"
+              >
+                <Target className="h-4 w-4 mr-2" />
+                View Projects
+              </Button>
               <Button variant="outline" onClick={handleSignOut}>
                 <LogOut className="h-4 w-4 mr-2" />
                 Sign Out
@@ -218,7 +284,46 @@ const Dashboard = () => {
             <CardContent>
               <div className="text-2xl font-bold">{stats?.totalApplications || 0}</div>
               <p className="text-xs text-muted-foreground">
-                Total applications received
+                {stats?.pendingApplications || 0} pending review
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Projects</CardTitle>
+              <Target className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{stats?.totalProjects || 0}</div>
+              <p className="text-xs text-muted-foreground">
+                {stats?.activeProjects || 0} active projects
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Donations</CardTitle>
+              <DollarSign className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{stats?.totalDonations || 0}</div>
+              <p className="text-xs text-muted-foreground">
+                KES {(stats?.totalDonationAmount || 0).toLocaleString()}
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Volunteers</CardTitle>
+              <Users className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{stats?.totalVolunteers || 0}</div>
+              <p className="text-xs text-muted-foreground">
+                {stats?.pendingVolunteers || 0} pending approval
               </p>
             </CardContent>
           </Card>
@@ -229,7 +334,9 @@ const Dashboard = () => {
               <Clock className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-orange-600">{stats?.pendingApplications || 0}</div>
+              <div className="text-2xl font-bold text-orange-600">
+                {(stats?.pendingApplications || 0) + (stats?.pendingVolunteers || 0)}
+              </div>
               <p className="text-xs text-muted-foreground">
                 Awaiting review
               </p>
@@ -238,13 +345,30 @@ const Dashboard = () => {
 
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Active Jobs</CardTitle>
+              <CardTitle className="text-sm font-medium">Active Content</CardTitle>
               <TrendingUp className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-green-600">{stats?.activeJobs || 0}</div>
+              <div className="text-2xl font-bold text-green-600">
+                {(stats?.activeJobs || 0) + (stats?.activeProjects || 0)}
+              </div>
               <p className="text-xs text-muted-foreground">
-                Currently accepting applications
+                Live jobs & projects
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Total Impact</CardTitle>
+              <Award className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold text-purple-600">
+                {((stats?.totalDonations || 0) + (stats?.totalVolunteers || 0) + (stats?.totalProjects || 0))}
+              </div>
+              <p className="text-xs text-muted-foreground">
+                Combined engagement
               </p>
             </CardContent>
           </Card>
@@ -297,45 +421,147 @@ const Dashboard = () => {
             </CardContent>
           </Card>
 
-          {/* Recent Jobs */}
+          {/* Recent Donations */}
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <Briefcase className="h-5 w-5" />
-                Recent Job Postings
+                <Heart className="h-5 w-5" />
+                Recent Donations
               </CardTitle>
-              <CardDescription>Latest job positions posted</CardDescription>
+              <CardDescription>Latest donations received</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {stats?.recentJobs.length === 0 ? (
-                  <p className="text-muted-foreground text-center py-4">No jobs posted yet</p>
+                {stats?.recentDonations.length === 0 ? (
+                  <p className="text-muted-foreground text-center py-4">No donations yet</p>
                 ) : (
-                  stats?.recentJobs.map((job: any) => (
-                    <div key={job.id} className="flex items-center justify-between p-3 border rounded-lg">
+                  stats?.recentDonations.map((donation: any) => (
+                    <div key={donation.id} className="flex items-center justify-between p-3 border rounded-lg">
                       <div>
-                        <p className="font-medium">{job.title}</p>
-                        <p className="text-sm text-muted-foreground">{job.location}</p>
-                        <p className="text-xs text-muted-foreground">
-                          Posted {new Date(job.created_at).toLocaleDateString()}
+                        <p className="font-medium">
+                          {donation.is_anonymous ? 'Anonymous' : donation.donor_name || donation.donor_email}
+                        </p>
+                        <p className="text-sm text-muted-foreground">
+                          {donation.payment_method} • {new Date(donation.created_at).toLocaleDateString()}
                         </p>
                       </div>
-                      <Badge variant={job.status === 'active' ? 'default' : 'secondary'}>
-                        {job.status}
-                      </Badge>
+                      <div className="text-right">
+                        <p className="font-bold text-green-600">KES {Number(donation.amount).toLocaleString()}</p>
+                        <Badge variant={donation.status === 'completed' ? 'default' : 'secondary'}>
+                          {donation.status}
+                        </Badge>
+                      </div>
                     </div>
                   ))
                 )}
               </div>
-              {stats?.recentJobs.length > 0 && (
+              {stats?.recentDonations.length > 0 && (
                 <Button 
                   variant="outline" 
                   className="w-full mt-4"
-                  onClick={() => navigate('/admin/careers')}
+                  onClick={() => window.open('/donate', '_blank')}
                 >
-                  Manage All Jobs
+                  View Donation Page
                 </Button>
               )}
+            </CardContent>
+          </Card>
+
+          {/* Recent Projects */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Target className="h-5 w-5" />
+                Recent Projects
+              </CardTitle>
+              <CardDescription>Latest projects and initiatives</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                {stats?.recentProjects.length === 0 ? (
+                  <p className="text-muted-foreground text-center py-4">No projects yet</p>
+                ) : (
+                  stats?.recentProjects.map((project: any) => (
+                    <div key={project.id} className="flex items-center justify-between p-3 border rounded-lg">
+                      <div>
+                        <p className="font-medium">{project.title}</p>
+                        <p className="text-sm text-muted-foreground">{project.location}</p>
+                        <p className="text-xs text-muted-foreground">
+                          Created {new Date(project.created_at).toLocaleDateString()}
+                        </p>
+                      </div>
+                      <div className="text-right">
+                        <Badge variant={project.status === 'active' ? 'default' : 'secondary'}>
+                          {project.status}
+                        </Badge>
+                        <p className="text-xs text-muted-foreground mt-1">
+                          {Math.round(((project.current_amount || 0) / project.goal_amount) * 100)}% funded
+                        </p>
+                      </div>
+                    </div>
+                  ))
+                )}
+              </div>
+              {stats?.recentProjects.length > 0 && (
+                <Button 
+                  variant="outline" 
+                  className="w-full mt-4"
+                  onClick={() => window.open('/projects', '_blank')}
+                >
+                  View All Projects
+                </Button>
+              )}
+            </CardContent>
+          </Card>
+
+          {/* System Overview */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <BarChart3 className="h-5 w-5" />
+                System Overview
+              </CardTitle>
+              <CardDescription>Platform statistics and health</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                <div className="flex items-center justify-between p-3 border rounded-lg">
+                  <div>
+                    <p className="font-medium">Content Engagement</p>
+                    <p className="text-sm text-muted-foreground">Overall platform activity</p>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-2xl font-bold text-blue-600">
+                      {Math.round(((stats?.totalApplications || 0) + (stats?.totalDonations || 0) + (stats?.totalVolunteers || 0)) / 10) || 0}%
+                    </p>
+                    <p className="text-xs text-muted-foreground">Engagement Score</p>
+                  </div>
+                </div>
+                <div className="flex items-center justify-between p-3 border rounded-lg">
+                  <div>
+                    <p className="font-medium">Content Health</p>
+                    <p className="text-sm text-muted-foreground">Active vs total content</p>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-2xl font-bold text-green-600">
+                      {Math.round((((stats?.activeJobs || 0) + (stats?.activeProjects || 0)) / Math.max((stats?.totalJobs || 1) + (stats?.totalProjects || 1), 1)) * 100)}%
+                    </p>
+                    <p className="text-xs text-muted-foreground">Active Content</p>
+                  </div>
+                </div>
+                <div className="flex items-center justify-between p-3 border rounded-lg">
+                  <div>
+                    <p className="font-medium">Response Rate</p>
+                    <p className="text-sm text-muted-foreground">Pending vs processed</p>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-2xl font-bold text-orange-600">
+                      {((stats?.pendingApplications || 0) + (stats?.pendingVolunteers || 0))}
+                    </p>
+                    <p className="text-xs text-muted-foreground">Items Pending</p>
+                  </div>
+                </div>
+              </div>
             </CardContent>
           </Card>
         </div>
@@ -343,22 +569,42 @@ const Dashboard = () => {
         {/* Quick Actions */}
         <Card className="mt-8">
           <CardHeader>
-            <CardTitle>Quick Actions</CardTitle>
-            <CardDescription>Common tasks and shortcuts</CardDescription>
+            <CardTitle>Content Management</CardTitle>
+            <CardDescription>Manage all platform content and features</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               <Button onClick={() => navigate('/admin/careers')} className="h-20 flex flex-col">
                 <Briefcase className="h-6 w-6 mb-2" />
-                Create Job Posting
-              </Button>
-              <Button variant="outline" onClick={() => navigate('/admin/careers')} className="h-20 flex flex-col">
-                <FileText className="h-6 w-6 mb-2" />
-                Review Applications
+                Manage Jobs
               </Button>
               <Button variant="outline" onClick={() => navigate('/admin/roles')} className="h-20 flex flex-col">
                 <Users className="h-6 w-6 mb-2" />
                 Manage Users
+              </Button>
+              <Button variant="outline" onClick={() => window.open('/projects', '_blank')} className="h-20 flex flex-col">
+                <Target className="h-6 w-6 mb-2" />
+                View Projects
+              </Button>
+              <Button variant="outline" onClick={() => window.open('/donate', '_blank')} className="h-20 flex flex-col">
+                <DollarSign className="h-6 w-6 mb-2" />
+                View Donations
+              </Button>
+              <Button variant="outline" onClick={() => window.open('/careers', '_blank')} className="h-20 flex flex-col">
+                <Eye className="h-6 w-6 mb-2" />
+                View Careers
+              </Button>
+              <Button variant="outline" onClick={() => window.open('/gallery', '_blank')} className="h-20 flex flex-col">
+                <BarChart3 className="h-6 w-6 mb-2" />
+                View Gallery
+              </Button>
+              <Button variant="outline" onClick={() => window.open('/contact', '_blank')} className="h-20 flex flex-col">
+                <Mail className="h-6 w-6 mb-2" />
+                View Contact
+              </Button>
+              <Button variant="outline" onClick={() => window.open('/about', '_blank')} className="h-20 flex flex-col">
+                <Award className="h-6 w-6 mb-2" />
+                View About
               </Button>
             </div>
           </CardContent>
