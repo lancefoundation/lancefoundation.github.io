@@ -6,6 +6,7 @@ import { Calendar, MapPin, Briefcase, Users } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/contexts/AuthContext';
 import { useToast } from '@/hooks/use-toast';
+import JobApplicationForm from '@/components/JobApplicationForm';
 
 interface JobPosting {
   id: string;
@@ -160,12 +161,11 @@ const Careers = () => {
                           Deadline: {new Date(job.deadline).toLocaleDateString()}
                         </div>
                       )}
-                      <Button 
-                        onClick={() => window.open(`mailto:careers@thelancefoundation.org?subject=Application for ${job.title}&body=Dear Hiring Team,%0D%0A%0D%0AI am interested in applying for the ${job.title} position.%0D%0A%0D%0APlease find my application details below:%0D%0A%0D%0ABest regards`)}
-                        className="md:ml-auto"
-                      >
-                        Apply Now
-                      </Button>
+                      <JobApplicationForm jobId={job.id} jobTitle={job.title}>
+                        <Button className="md:ml-auto">
+                          Apply Now
+                        </Button>
+                      </JobApplicationForm>
                     </div>
                   </div>
                 </CardContent>
