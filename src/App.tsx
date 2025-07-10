@@ -19,6 +19,7 @@ import Careers from "./pages/Careers";
 import CareersManagement from "./pages/CareersManagement";
 import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
+import AdminCMS from "./pages/AdminCMS";
 import RoleManagement from "./pages/RoleManagement";
 import NotFound from "./pages/NotFound";
 
@@ -35,6 +36,7 @@ const App = () => (
             {/* Authentication Routes */}
             <Route path="/auth" element={<Auth />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/admin/cms" element={<AdminCMS />} />
             <Route path="/admin/roles" element={<RoleManagement />} />
             <Route path="/admin/careers" element={<CareersManagement />} />
             
