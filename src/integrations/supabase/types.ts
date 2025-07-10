@@ -14,6 +14,45 @@ export type Database = {
   }
   public: {
     Tables: {
+      content_pages: {
+        Row: {
+          content: string | null
+          created_at: string
+          featured_image: string | null
+          id: string
+          is_published: boolean | null
+          meta_description: string | null
+          page_type: string | null
+          slug: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          content?: string | null
+          created_at?: string
+          featured_image?: string | null
+          id?: string
+          is_published?: boolean | null
+          meta_description?: string | null
+          page_type?: string | null
+          slug: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          content?: string | null
+          created_at?: string
+          featured_image?: string | null
+          id?: string
+          is_published?: boolean | null
+          meta_description?: string | null
+          page_type?: string | null
+          slug?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       donations: {
         Row: {
           amount: number
@@ -73,6 +112,42 @@ export type Database = {
           },
         ]
       }
+      email_templates: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          is_active: boolean | null
+          name: string
+          subject: string
+          template_type: string | null
+          updated_at: string
+          variables: string[] | null
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: string
+          is_active?: boolean | null
+          name: string
+          subject: string
+          template_type?: string | null
+          updated_at?: string
+          variables?: string[] | null
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          is_active?: boolean | null
+          name?: string
+          subject?: string
+          template_type?: string | null
+          updated_at?: string
+          variables?: string[] | null
+        }
+        Relationships: []
+      }
       job_applications: {
         Row: {
           applicant_email: string
@@ -128,43 +203,58 @@ export type Database = {
       }
       job_postings: {
         Row: {
+          benefits: string[] | null
           created_at: string
           created_by: string | null
           deadline: string | null
+          department: string | null
           description: string | null
+          experience_level: string | null
           id: string
           job_type: string | null
           location: string | null
+          positions_available: number | null
           requirements: string | null
           salary_range: string | null
+          skills_required: string[] | null
           status: string | null
           title: string
           updated_at: string
         }
         Insert: {
+          benefits?: string[] | null
           created_at?: string
           created_by?: string | null
           deadline?: string | null
+          department?: string | null
           description?: string | null
+          experience_level?: string | null
           id?: string
           job_type?: string | null
           location?: string | null
+          positions_available?: number | null
           requirements?: string | null
           salary_range?: string | null
+          skills_required?: string[] | null
           status?: string | null
           title: string
           updated_at?: string
         }
         Update: {
+          benefits?: string[] | null
           created_at?: string
           created_by?: string | null
           deadline?: string | null
+          department?: string | null
           description?: string | null
+          experience_level?: string | null
           id?: string
           job_type?: string | null
           location?: string | null
+          positions_available?: number | null
           requirements?: string | null
           salary_range?: string | null
+          skills_required?: string[] | null
           status?: string | null
           title?: string
           updated_at?: string

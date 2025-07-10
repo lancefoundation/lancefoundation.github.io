@@ -41,7 +41,7 @@ interface ContentPage {
   is_published: boolean;
   created_at: string;
   updated_at: string;
-  page_type: 'page' | 'blog' | 'campaign' | 'news';
+  page_type: string;
   featured_image?: string;
 }
 
@@ -57,7 +57,7 @@ const AdminCMS = () => {
     slug: '',
     content: '',
     meta_description: '',
-    page_type: 'page' as const,
+    page_type: 'page',
     is_published: false
   });
   const navigate = useNavigate();

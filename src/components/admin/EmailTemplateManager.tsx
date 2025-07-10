@@ -28,7 +28,7 @@ interface EmailTemplate {
   name: string;
   subject: string;
   content: string;
-  template_type: 'application_received' | 'interview_invitation' | 'job_offer' | 'rejection' | 'custom';
+  template_type: string;
   variables: string[];
   is_active: boolean;
   created_at: string;
@@ -44,7 +44,7 @@ const EmailTemplateManager = () => {
     name: '',
     subject: '',
     content: '',
-    template_type: 'custom' as const,
+    template_type: 'custom',
     variables: [] as string[],
     is_active: true
   });
@@ -277,16 +277,19 @@ HR Team
     }
   };
 
-  const createDefaultTemplate = (type: keyof typeof defaultTemplates) => {
-    setNewTemplate({
-      name: getTemplateTypeLabel(type),
-      subject: defaultTemplates[type].subject,
-      content: defaultTemplates[type].content,
-      template_type: type,
-      variables: ['applicant_name', 'job_title', 'company_name'],
-      is_active: true
-    });
-    setIsCreating(true);
+  const createDefaultTemplate = (type: string) => {
+    const template = defaultTemplates[type as keyof typeof defaultTemplates];
+    if (template) {
+      setNewTemplate({
+        name: getTemplateTypeLabel(type),
+        subject: template.subject,
+        content: template.content,
+        template_type: type,
+        variables: ['applicant_name', 'job_title', 'company_name'],
+        is_active: true
+      });
+      setIsCreating(true);
+    }
   };
 
   return (
@@ -391,7 +394,7 @@ HR Team
                         <Label htmlFor="template-type">Type</Label>
                         <Select 
                           value={newTemplate.template_type} 
-                          onValueChange={(value: any) => setNewTemplate({ ...newTemplate, template_type: value })}
+                          onValueChange={(value: string) => setNewTemplate({ ...newTemplate, template_type: value })}
                         >
                           <SelectTrigger>
                             <SelectValue />
@@ -511,7 +514,7 @@ HR Team
                   <Button 
                     size="sm" 
                     className="w-full"
-                    onClick={() => createDefaultTemplate(type as keyof typeof defaultTemplates)}
+                    onClick={() => createDefaultTemplate(type)}
                   >
                     <Plus className="h-3 w-3 mr-1" />
                     Create Template
