@@ -39,22 +39,22 @@ const About = () => {
 
   const globalPresence = [
     {
-      region: "East Africa",
-      countries: ["Kenya", "Tanzania", "Uganda", "Rwanda"],
+      region: "Central Kenya",
+      counties: ["Muranga", "Nyandarua", "Kiambu", "Nairobi" , "Nyeri"],
       programs: ["Clean Water", "Healthcare", "Education"],
-      beneficiaries: "45,000+"
+      beneficiaries: "1,000+"
     },
     {
-      region: "Southeast Asia",
-      countries: ["Philippines", "Indonesia", "Cambodia"],
+      region: "North Eastern Region",
+      counties: ["Wajir", "Mandera", "Tana River"],
       programs: ["Healthcare", "Community Development"],
-      beneficiaries: "28,000+"
+      beneficiaries: "200+"
     },
     {
-      region: "Latin America",
-      countries: ["Guatemala", "Honduras", "Peru"],
+      region: "Rift Valley Region",
+      countries: ["Nakuru", "Eldoret", "Nandi"],
       programs: ["Education", "Healthcare", "Clean Water"],
-      beneficiaries: "35,000+"
+      beneficiaries: "300+"
     }
   ];
 
@@ -63,19 +63,19 @@ const About = () => {
       icon: Stethoscope,
       title: "Healthcare Access",
       description: "Providing essential medical services, training healthcare workers, and establishing sustainable healthcare systems in underserved communities.",
-      impact: "25 clinics established, 200+ healthcare workers trained"
+      impact: "2 mobile clinics established, 20 healthcare workers volunteered"
     },
     {
       icon: BookOpen,
       title: "Education & Literacy",
       description: "Building schools, training teachers, providing educational materials, and creating opportunities for children and adults to learn and grow.",
-      impact: "45 schools built, 1,200+ students enrolled, 85+ teachers trained"
+      impact: "3 schools Supported, 1,200+ students mentored, 85+ teachers Recognised"
     },
     {
       icon: Droplets,
       title: "Clean Water & Sanitation",
       description: "Developing sustainable water systems, promoting hygiene practices, and ensuring access to clean water for drinking and sanitation.",
-      impact: "50+ wells drilled, 40,000+ people with clean water access"
+      impact: "5 wells Equipped, 4,000+ people with clean water access"
     },
     {
       icon: Users,
@@ -130,7 +130,7 @@ const About = () => {
               <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">Our Story</h2>
               <div className="space-y-4 text-gray-600 leading-relaxed">
                 <p>
-                  The Lance Foundation was founded in 2008 by Dr. Lance Williams with a vision to create sustainable change in communities worldwide. What began as a small medical mission has evolved into a comprehensive development organization working across multiple sectors to address the root causes of poverty and inequality.
+                  The Lance Foundation was founded in 2019 by Denis Gathua and friends  with a vision to create sustainable change in communities worldwide. What began as a small medical mission has evolved into a comprehensive development organization working across multiple sectors to address the root causes of poverty and inequality.
                 </p>
                 <p>
                   Named after our founder, our organization has grown from serving a single community to operating in 25 countries across three continents. We believe that true transformation happens when communities are empowered to lead their own development journey, which is why we focus on building local capacity and ensuring program sustainability.
@@ -148,7 +148,7 @@ const About = () => {
                 className="rounded-lg shadow-xl"
               />
               <div className="absolute -bottom-6 -right-6 bg-green-500 text-white p-6 rounded-lg shadow-lg">
-                <div className="text-2xl font-bold">108,500+</div>
+                <div className="text-2xl font-bold">1,085+</div>
                 <div className="text-sm">Lives Transformed</div>
               </div>
             </div>
@@ -193,8 +193,8 @@ const About = () => {
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Global Presence</h2>
-            <p className="text-xl text-gray-600">Working across three continents to create lasting change</p>
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Countrywide Presence</h2>
+            <p className="text-xl text-gray-600">Working across Kenya to create lasting change</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -209,7 +209,7 @@ const About = () => {
                 <CardContent>
                   <div className="space-y-4">
                     <div>
-                      <h4 className="font-semibold text-gray-900 mb-2">Countries</h4>
+                      <h4 className="font-semibold text-gray-900 mb-2">Counties</h4>
                       <p className="text-gray-600">{region.countries.join(', ')}</p>
                     </div>
                     <div>
